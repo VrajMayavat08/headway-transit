@@ -1,17 +1,15 @@
 :root {
   color-scheme: dark;
-  --color-bg: #111817;
-  --color-surface: #151d1b;
-  --color-raised: #1a2321;
-  --color-border: #2a3532;
+  /* Application chrome colors are owned here; MapLibre geographic colors live in NetworkMap. */
+  --color-bg: #0b1212;
+  --color-surface: #101817;
+  --color-surface-raised: #151f1d;
+  --color-border: #263330;
   --color-text: #f1eee5;
-  --color-muted: color-mix(in srgb, var(--color-text) 62%, var(--color-bg));
-  --color-background: var(--color-bg);
-  --color-separator: var(--color-border);
-  --color-active: var(--color-raised);
-  --color-live: #f05a5d;
+  --color-text-muted: #899692;
+  --color-accent: #ff4d55;
   --color-control-text: color-mix(in srgb, var(--color-text) 91%, var(--color-bg));
-  --color-playback-track: color-mix(in srgb, var(--color-text) 36%, var(--color-bg));
+  --color-playback-track: color-mix(in srgb, var(--color-text-muted) 46%, var(--color-bg));
   --radius-small: 3px;
   --space-1: 4px;
   --space-2: 8px;

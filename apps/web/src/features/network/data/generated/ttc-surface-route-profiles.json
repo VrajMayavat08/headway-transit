@@ -1,0 +1,1927 @@
+[
+  {
+    "routeId": "29",
+    "routeShortName": "29",
+    "routeLongName": "Dufferin",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50802412",
+    "headsign": "South - 29C Dufferin towards Exhibition (Princes' Gates)",
+    "directionId": "0",
+    "stopCount": 97,
+    "firstStop": {
+      "stopId": "14799",
+      "stopName": "Wilson Station"
+    },
+    "lastStop": {
+      "stopId": "14363",
+      "stopName": "Princes' Gates Loop at Canada Blvd - CNE East Entrance"
+    },
+    "stopSequence": [
+      {
+        "stopId": "14799",
+        "stopName": "Wilson Station"
+      },
+      {
+        "stopId": "2107",
+        "stopName": "Dufferin St at Wilson Ave South Side"
+      },
+      {
+        "stopId": "2105",
+        "stopName": "Dufferin St at Whitley Ave"
+      },
+      {
+        "stopId": "2024",
+        "stopName": "Dufferin St at Bridgeland Ave South Side"
+      },
+      {
+        "stopId": "2064",
+        "stopName": "Dufferin St at Jane Osler Blvd - Yorkdale Shopping Centre"
+      },
+      {
+        "stopId": "2019",
+        "stopName": "Dufferin St at Bentworth Ave"
+      },
+      {
+        "stopId": "2076",
+        "stopName": "Dufferin St at Orfus Rd"
+      },
+      {
+        "stopId": "2087",
+        "stopName": "Dufferin St at Samor Rd South Side"
+      },
+      {
+        "stopId": "2016",
+        "stopName": "Dufferin St at Apex Rd South Side"
+      },
+      {
+        "stopId": "2070",
+        "stopName": "Dufferin St at Lawrence Ave West"
+      },
+      {
+        "stopId": "2078",
+        "stopName": "Dufferin St at Playfair Ave"
+      },
+      {
+        "stopId": "2056",
+        "stopName": "Dufferin St at Glengrove Ave"
+      },
+      {
+        "stopId": "2054",
+        "stopName": "Dufferin St at Glencairn Ave"
+      },
+      {
+        "stopId": "15471",
+        "stopName": "Dufferin St at Wingold Ave"
+      },
+      {
+        "stopId": "2023",
+        "stopName": "Dufferin St at Briar Hill Ave"
+      },
+      {
+        "stopId": "2026",
+        "stopName": "Dufferin St at Castlefield Ave"
+      },
+      {
+        "stopId": "2021",
+        "stopName": "Dufferin St at Bowie Ave"
+      },
+      {
+        "stopId": "2046",
+        "stopName": "Dufferin St at Eglinton Ave West"
+      },
+      {
+        "stopId": "2086",
+        "stopName": "Dufferin St at Rowan Ave"
+      },
+      {
+        "stopId": "2079",
+        "stopName": "Dufferin St at Preston Rd South Side"
+      },
+      {
+        "stopId": "2060",
+        "stopName": "Dufferin St at Holmesdale Rd"
+      },
+      {
+        "stopId": "2049",
+        "stopName": "Dufferin St at Eversfield Rd South Side"
+      },
+      {
+        "stopId": "2083",
+        "stopName": "Dufferin St at Rogers Rd"
+      },
+      {
+        "stopId": "2061",
+        "stopName": "Dufferin St at Hope St"
+      },
+      {
+        "stopId": "2017",
+        "stopName": "Dufferin St at Ascot Ave"
+      },
+      {
+        "stopId": "2094",
+        "stopName": "Dufferin St at St Clair Ave West"
+      },
+      {
+        "stopId": "2085",
+        "stopName": "Dufferin St at Auburn Ave"
+      },
+      {
+        "stopId": "2039",
+        "stopName": "Dufferin St at Davenport Rd"
+      },
+      {
+        "stopId": "16470",
+        "stopName": "Dufferin St at Brandon Ave"
+      },
+      {
+        "stopId": "2044",
+        "stopName": "Dufferin St at Dupont St South Side"
+      },
+      {
+        "stopId": "2068",
+        "stopName": "Dufferin St at Lappin Ave South Side"
+      },
+      {
+        "stopId": "2089",
+        "stopName": "Dufferin St at Shanly St"
+      },
+      {
+        "stopId": "2013",
+        "stopName": "Dufferin St at Bloor St West - Dufferin Station"
+      },
+      {
+        "stopId": "9341",
+        "stopName": "Dufferin St at Dufferin Park Ave"
+      },
+      {
+        "stopId": "2099",
+        "stopName": "Dufferin St at Sylvan Ave"
+      },
+      {
+        "stopId": "2034",
+        "stopName": "Dufferin St at College St"
+      },
+      {
+        "stopId": "2041",
+        "stopName": "Dufferin St at Dundas St West"
+      },
+      {
+        "stopId": "2058",
+        "stopName": "Dufferin St at Gordon St"
+      },
+      {
+        "stopId": "2015",
+        "stopName": "Dufferin St at Alma Ave"
+      },
+      {
+        "stopId": "15030",
+        "stopName": "Dufferin St at Queen St West"
+      },
+      {
+        "stopId": "2074",
+        "stopName": "Dufferin St at Melbourne Ave"
+      },
+      {
+        "stopId": "2067",
+        "stopName": "Dufferin St at King St West"
+      },
+      {
+        "stopId": "2072",
+        "stopName": "Dufferin St at Liberty St"
+      },
+      {
+        "stopId": "2092",
+        "stopName": "Dufferin St at Springhurst Ave"
+      },
+      {
+        "stopId": "2032",
+        "stopName": "Dufferin Gate Loop"
+      },
+      {
+        "stopId": "14469",
+        "stopName": "Saskatchewan Rd at Dufferin St East Side"
+      },
+      {
+        "stopId": "14362",
+        "stopName": "Manitoba Dr at Quebec St"
+      },
+      {
+        "stopId": "14361",
+        "stopName": "Manitoba Dr at Nova Scotia Ave - Exhibition GO Station"
+      },
+      {
+        "stopId": "14363",
+        "stopName": "Princes' Gates Loop at Canada Blvd - CNE East Entrance"
+      }
+    ]
+  },
+  {
+    "routeId": "35",
+    "routeShortName": "35",
+    "routeLongName": "Jane",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50804353",
+    "headsign": "South - 35B Jane towards Mount Dennis Station via Hullmar",
+    "directionId": "0",
+    "stopCount": 107,
+    "firstStop": {
+      "stopId": "15577",
+      "stopName": "Pioneer Village Station"
+    },
+    "lastStop": {
+      "stopId": "16598",
+      "stopName": "Mount Dennis Station"
+    },
+    "stopSequence": [
+      {
+        "stopId": "15577",
+        "stopName": "Pioneer Village Station"
+      },
+      {
+        "stopId": "1602",
+        "stopName": "Steeles Ave West at Northwest Gate"
+      },
+      {
+        "stopId": "1593",
+        "stopName": "Steeles Ave West at Murray Ross Pkwy"
+      },
+      {
+        "stopId": "1173",
+        "stopName": "Jane St at Steeles Ave West South Side"
+      },
+      {
+        "stopId": "3904",
+        "stopName": "Jane St at Hullmar Dr"
+      },
+      {
+        "stopId": "1159",
+        "stopName": "Hullmar Dr at Wheelwright Cres (East)"
+      },
+      {
+        "stopId": "1158",
+        "stopName": "Hullmar Dr at Peter Kaiser Gate"
+      },
+      {
+        "stopId": "3736",
+        "stopName": "Hullmar Dr at Hisey Cres (North)"
+      },
+      {
+        "stopId": "3739",
+        "stopName": "Hullmar Dr at Hisey Cres (South)"
+      },
+      {
+        "stopId": "3730",
+        "stopName": "Hullmar Dr at Bamford Cres"
+      },
+      {
+        "stopId": "3745",
+        "stopName": "Hullmar Dr at Shoreham Dr"
+      },
+      {
+        "stopId": "3740",
+        "stopName": "Hullmar Dr at Monaco Crt"
+      },
+      {
+        "stopId": "3741",
+        "stopName": "Hullmar Dr at Ruthmar Cres (North)"
+      },
+      {
+        "stopId": "3743",
+        "stopName": "Hullmar Dr at Ruthmar Cres (South)"
+      },
+      {
+        "stopId": "3733",
+        "stopName": "Hullmar Dr at Bloomington Cres (East)"
+      },
+      {
+        "stopId": "16759",
+        "stopName": "Jane St at York Gate Blvd"
+      },
+      {
+        "stopId": "9146",
+        "stopName": "4148 Jane St"
+      },
+      {
+        "stopId": "3891",
+        "stopName": "Jane St at Finch Ave West South Side"
+      },
+      {
+        "stopId": "3892",
+        "stopName": "Jane St at Firgrove Cres (North) South Side"
+      },
+      {
+        "stopId": "3893",
+        "stopName": "Jane St at Firgrove Cres (South) South Side"
+      },
+      {
+        "stopId": "3885",
+        "stopName": "Jane St at Eddystone Ave"
+      },
+      {
+        "stopId": "16885",
+        "stopName": "Jane St at Grandravine Dr"
+      },
+      {
+        "stopId": "3876",
+        "stopName": "Jane St at Courage Ave South Side"
+      },
+      {
+        "stopId": "3930",
+        "stopName": "Jane St at Stanley Rd"
+      },
+      {
+        "stopId": "3873",
+        "stopName": "Jane St at Clair Rd"
+      },
+      {
+        "stopId": "3921",
+        "stopName": "Jane St at Sheppard Ave West"
+      },
+      {
+        "stopId": "10616",
+        "stopName": "Jane St at Sheppard Ave West South Side"
+      },
+      {
+        "stopId": "3897",
+        "stopName": "Jane St at Giltspur Dr"
+      },
+      {
+        "stopId": "14257",
+        "stopName": "Jane St at Troutbrooke Dr"
+      },
+      {
+        "stopId": "3870",
+        "stopName": "Jane St at Chalkfarm Dr (North) South Side"
+      },
+      {
+        "stopId": "3859",
+        "stopName": "Opposite 2265 Jane St"
+      },
+      {
+        "stopId": "3871",
+        "stopName": "Jane St at Chalkfarm Dr (South) South Side"
+      },
+      {
+        "stopId": "3939",
+        "stopName": "Jane St at William Cragg Dr"
+      },
+      {
+        "stopId": "3941",
+        "stopName": "Jane St at Wilson Ave South Side"
+      },
+      {
+        "stopId": "3866",
+        "stopName": "Jane St at Beverly Hills Dr"
+      },
+      {
+        "stopId": "16877",
+        "stopName": "Jane St at Gordon Mackay Rd"
+      },
+      {
+        "stopId": "3872",
+        "stopName": "Jane St at Church St"
+      },
+      {
+        "stopId": "15153",
+        "stopName": "Jane St at John St"
+      },
+      {
+        "stopId": "3907",
+        "stopName": "Jane St at Lawrence Ave West"
+      },
+      {
+        "stopId": "2740",
+        "stopName": "Jane St at Wright Ave"
+      },
+      {
+        "stopId": "2737",
+        "stopName": "Jane St at Harding Ave"
+      },
+      {
+        "stopId": "16878",
+        "stopName": "Jane St at Denison Rd East South Side"
+      },
+      {
+        "stopId": "3935",
+        "stopName": "Jane St at Weston Rd"
+      },
+      {
+        "stopId": "16880",
+        "stopName": "Jane St at Emmett Ave"
+      },
+      {
+        "stopId": "2366",
+        "stopName": "Eglinton Ave West at Jane St East Side"
+      },
+      {
+        "stopId": "16194",
+        "stopName": "Opposite 3574 Eglinton Ave West"
+      },
+      {
+        "stopId": "9383",
+        "stopName": "Eglinton Ave West at Weston Rd"
+      },
+      {
+        "stopId": "16746",
+        "stopName": "Keelesdale Rd at Eglinton Ave West"
+      },
+      {
+        "stopId": "16598",
+        "stopName": "Mount Dennis Station"
+      }
+    ]
+  },
+  {
+    "routeId": "52",
+    "routeShortName": "52",
+    "routeLongName": "Lawrence West",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50813571",
+    "headsign": "West - 52A Lawrence West towards Pearson Airport via Dixon Rd",
+    "directionId": "1",
+    "stopCount": 193,
+    "firstStop": {
+      "stopId": "15184",
+      "stopName": "Lawrence Station"
+    },
+    "lastStop": {
+      "stopId": "14092",
+      "stopName": "Pearson Airport Terminal 1 - Ground Level Column R4"
+    },
+    "stopSequence": [
+      {
+        "stopId": "15184",
+        "stopName": "Lawrence Station"
+      },
+      {
+        "stopId": "14725",
+        "stopName": "Lawrence Station"
+      },
+      {
+        "stopId": "5388",
+        "stopName": "Lawrence Ave West at Lorindale Ave"
+      },
+      {
+        "stopId": "5380",
+        "stopName": "Lawrence Ave West at Jedburgh Rd"
+      },
+      {
+        "stopId": "5375",
+        "stopName": "Lawrence Ave West at Greer Rd"
+      },
+      {
+        "stopId": "5368",
+        "stopName": "Lawrence Ave West at Elm Rd West Side"
+      },
+      {
+        "stopId": "5336",
+        "stopName": "Lawrence Ave West at Avenue Rd"
+      },
+      {
+        "stopId": "5376",
+        "stopName": "Lawrence Ave West at Grey Rd"
+      },
+      {
+        "stopId": "5386",
+        "stopName": "Lawrence Ave West at Ledbury St"
+      },
+      {
+        "stopId": "5411",
+        "stopName": "Lawrence Ave West at Welland Rd"
+      },
+      {
+        "stopId": "5339",
+        "stopName": "Lawrence Ave West at Bathurst St"
+      },
+      {
+        "stopId": "5338",
+        "stopName": "Lawrence Ave West at Bathurst St West Side"
+      },
+      {
+        "stopId": "5349",
+        "stopName": "Lawrence Ave West at Brucewood Cres"
+      },
+      {
+        "stopId": "5348",
+        "stopName": "Lawrence Ave West at Brookview Dr"
+      },
+      {
+        "stopId": "5410",
+        "stopName": "Lawrence Ave West at Varna Dr West Side"
+      },
+      {
+        "stopId": "14734",
+        "stopName": "Lawrence West Station"
+      },
+      {
+        "stopId": "14735",
+        "stopName": "Lawrence West Station"
+      },
+      {
+        "stopId": "5390",
+        "stopName": "Lawrence Ave West at Marlee Ave West Side"
+      },
+      {
+        "stopId": "5344",
+        "stopName": "Lawrence Ave West at Bolingbroke Rd"
+      },
+      {
+        "stopId": "5354",
+        "stopName": "Lawrence Ave West at Via Bagnato"
+      },
+      {
+        "stopId": "5361",
+        "stopName": "Lawrence Ave West at Dufferin St"
+      },
+      {
+        "stopId": "5334",
+        "stopName": "Lawrence Ave West at Apex Rd"
+      },
+      {
+        "stopId": "5364",
+        "stopName": "Lawrence Ave West at Dufflaw Rd"
+      },
+      {
+        "stopId": "5404",
+        "stopName": "Lawrence Ave West at Sage Ave"
+      },
+      {
+        "stopId": "5351",
+        "stopName": "Lawrence Ave West at Caledonia Rd West Side"
+      },
+      {
+        "stopId": "5341",
+        "stopName": "Lawrence Ave West at Benton Rd"
+      },
+      {
+        "stopId": "5367",
+        "stopName": "Lawrence Ave West at Duval Dr"
+      },
+      {
+        "stopId": "5382",
+        "stopName": "Lawrence Ave West at Keele St"
+      },
+      {
+        "stopId": "5393",
+        "stopName": "Lawrence Ave West at Pimlico Rd West Side"
+      },
+      {
+        "stopId": "5357",
+        "stopName": "Lawrence Ave West at Culford Rd"
+      },
+      {
+        "stopId": "5358",
+        "stopName": "Lawrence Ave West at De Marco Blvd West Side"
+      },
+      {
+        "stopId": "5345",
+        "stopName": "Lawrence Ave West at Brookhaven Dr West Side"
+      },
+      {
+        "stopId": "5342",
+        "stopName": "Lawrence Ave West at Blackstone St"
+      },
+      {
+        "stopId": "5379",
+        "stopName": "Lawrence Ave West at Jane St"
+      },
+      {
+        "stopId": "5396",
+        "stopName": "Lawrence Ave West at Pine St"
+      },
+      {
+        "stopId": "5398",
+        "stopName": "Lawrence Ave West at Ralph St West Side"
+      },
+      {
+        "stopId": "5415",
+        "stopName": "Lawrence Ave West at Weston Rd - Weston GO Station"
+      },
+      {
+        "stopId": "5413",
+        "stopName": "Lawrence Ave West at Weston Rd West Side"
+      },
+      {
+        "stopId": "5387",
+        "stopName": "Lawrence Ave West at Little Ave"
+      },
+      {
+        "stopId": "5406",
+        "stopName": "Lawrence Ave West at Scarlett Rd"
+      },
+      {
+        "stopId": "6044",
+        "stopName": "Scarlett Rd at Lockheed Blvd North Side"
+      },
+      {
+        "stopId": "6047",
+        "stopName": "Dixon Rd at Riverview Heights West Side"
+      },
+      {
+        "stopId": "5000",
+        "stopName": "Dixon Rd at Roxaline St"
+      },
+      {
+        "stopId": "5004",
+        "stopName": "Dixon Rd at St Phillips Rd"
+      },
+      {
+        "stopId": "4994",
+        "stopName": "Dixon Rd at McManus Rd West Side"
+      },
+      {
+        "stopId": "4982",
+        "stopName": "Dixon Rd at Golfwood Heights"
+      },
+      {
+        "stopId": "4983",
+        "stopName": "Dixon Rd at Havenridge Dr West Side"
+      },
+      {
+        "stopId": "4988",
+        "stopName": "Dixon Rd at Islington Ave"
+      },
+      {
+        "stopId": "4971",
+        "stopName": "Dixon Rd at Chetta Pl"
+      },
+      {
+        "stopId": "13699",
+        "stopName": "Opposite 327 Dixon Rd"
+      },
+      {
+        "stopId": "4991",
+        "stopName": "Dixon Rd at Kipling Ave"
+      },
+      {
+        "stopId": "4978",
+        "stopName": "Dixon Rd at Celestine Dr"
+      },
+      {
+        "stopId": "4993",
+        "stopName": "Dixon Rd at Martin Grove Rd"
+      },
+      {
+        "stopId": "4984",
+        "stopName": "626 Dixon Rd"
+      },
+      {
+        "stopId": "4979",
+        "stopName": "Dixon Rd at City View Dr"
+      },
+      {
+        "stopId": "4972",
+        "stopName": "Dixon Rd at Attwell Dr"
+      },
+      {
+        "stopId": "4976",
+        "stopName": "Dixon Rd at Carlingview Dr"
+      },
+      {
+        "stopId": "4973",
+        "stopName": "950 Dixon Rd"
+      },
+      {
+        "stopId": "4986",
+        "stopName": "Airport Rd at Highway 427 Overpass West Side"
+      },
+      {
+        "stopId": "15144",
+        "stopName": "Jetliner Rd at Airport Rd South Side"
+      },
+      {
+        "stopId": "14092",
+        "stopName": "Pearson Airport Terminal 1 - Ground Level Column R4"
+      }
+    ]
+  },
+  {
+    "routeId": "54",
+    "routeShortName": "54",
+    "routeLongName": "Lawrence East",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50814251",
+    "headsign": "East - 54A Lawrence East towards Starspray",
+    "directionId": "0",
+    "stopCount": 126,
+    "firstStop": {
+      "stopId": "16603",
+      "stopName": "Don Valley Station"
+    },
+    "lastStop": {
+      "stopId": "9970",
+      "stopName": "Starspray Loop at Lawrence Ave East"
+    },
+    "stopSequence": [
+      {
+        "stopId": "16603",
+        "stopName": "Don Valley Station"
+      },
+      {
+        "stopId": "16748",
+        "stopName": "Wynford Dr at Don Mills Rd"
+      },
+      {
+        "stopId": "1942",
+        "stopName": "Don Mills Rd at Green Belt Dr North Side"
+      },
+      {
+        "stopId": "1922",
+        "stopName": "Don Mills Rd at The Donway East (South) North Side"
+      },
+      {
+        "stopId": "1961",
+        "stopName": "Don Mills Rd at Clock Tower Rd"
+      },
+      {
+        "stopId": "1946",
+        "stopName": "Don Mills Rd at Lawrence Ave East"
+      },
+      {
+        "stopId": "5259",
+        "stopName": "Lawrence Ave East at The Donway East"
+      },
+      {
+        "stopId": "5275",
+        "stopName": "Lawrence Ave East at Greenland Rd East Side"
+      },
+      {
+        "stopId": "5313",
+        "stopName": "Lawrence Ave East at Railside Rd (West) East Side"
+      },
+      {
+        "stopId": "5312",
+        "stopName": "Lawrence Ave East at Railside Rd (East)"
+      },
+      {
+        "stopId": "5245",
+        "stopName": "Lawrence Ave East at Carnforth Rd East Side"
+      },
+      {
+        "stopId": "5328",
+        "stopName": "Lawrence Ave East at Victoria Park Ave"
+      },
+      {
+        "stopId": "16527",
+        "stopName": "Lawrence Ave East at Townley Ave"
+      },
+      {
+        "stopId": "5305",
+        "stopName": "Lawrence Ave East at Pharmacy Ave"
+      },
+      {
+        "stopId": "16526",
+        "stopName": "Lawrence Ave East at Elinor Ave"
+      },
+      {
+        "stopId": "5330",
+        "stopName": "Lawrence Ave East at Warden Ave"
+      },
+      {
+        "stopId": "5255",
+        "stopName": "Lawrence Ave East at Crockford Blvd"
+      },
+      {
+        "stopId": "5325",
+        "stopName": "Lawrence Ave East at Underwriters Rd"
+      },
+      {
+        "stopId": "11676",
+        "stopName": "Lawrence Ave East at Birchmount Rd"
+      },
+      {
+        "stopId": "16611",
+        "stopName": "2231 Lawrence Ave East"
+      },
+      {
+        "stopId": "5279",
+        "stopName": "Lawrence Ave East at Kennedy Rd East Side"
+      },
+      {
+        "stopId": "14730",
+        "stopName": "Lawrence East Station"
+      },
+      {
+        "stopId": "5311",
+        "stopName": "Lawrence Ave East at Prudential Dr East Side"
+      },
+      {
+        "stopId": "5294",
+        "stopName": "Lawrence Ave East at Midland Ave East Side"
+      },
+      {
+        "stopId": "9930",
+        "stopName": "Lawrence Ave East at Brockley Dr East Side"
+      },
+      {
+        "stopId": "5286",
+        "stopName": "Lawrence Ave East at Marcos Blvd"
+      },
+      {
+        "stopId": "5239",
+        "stopName": "Lawrence Ave East at Brimley Rd"
+      },
+      {
+        "stopId": "5229",
+        "stopName": "Lawrence Ave East at Barrymore Rd"
+      },
+      {
+        "stopId": "16865",
+        "stopName": "Lawrence Ave E at Valparaiso Ave - Scarborough General Hospital"
+      },
+      {
+        "stopId": "5242",
+        "stopName": "Lawrence Ave East at Burnview Cres East Side"
+      },
+      {
+        "stopId": "5235",
+        "stopName": "Lawrence Ave East at Ben Stanton Blvd East Side"
+      },
+      {
+        "stopId": "5233",
+        "stopName": "Lawrence Ave East at Bellamy Rd North"
+      },
+      {
+        "stopId": "5273",
+        "stopName": "Lawrence Ave East at Greencedar Circt East Side"
+      },
+      {
+        "stopId": "5307",
+        "stopName": "Lawrence Ave East at Cedarbrae Mall"
+      },
+      {
+        "stopId": "9503",
+        "stopName": "Lawrence Ave East at Markham Rd"
+      },
+      {
+        "stopId": "5274",
+        "stopName": "Lawrence Ave East at Greencrest Circt East Side"
+      },
+      {
+        "stopId": "5264",
+        "stopName": "Lawrence Ave East at Fortune Gate East Side"
+      },
+      {
+        "stopId": "5316",
+        "stopName": "Lawrence Ave East at Scarborough Golf Club Rd"
+      },
+      {
+        "stopId": "5297",
+        "stopName": "Lawrence Ave East at Mossbank Dr"
+      },
+      {
+        "stopId": "5319",
+        "stopName": "Lawrence Ave East at Susan St"
+      },
+      {
+        "stopId": "5299",
+        "stopName": "Lawrence Ave East at Orton Park Rd"
+      },
+      {
+        "stopId": "5302",
+        "stopName": "Lawrence Ave East at Overture Rd"
+      },
+      {
+        "stopId": "5266",
+        "stopName": "Lawrence Ave East at Galloway Rd"
+      },
+      {
+        "stopId": "5228",
+        "stopName": "4121 Lawrence Ave East"
+      },
+      {
+        "stopId": "5281",
+        "stopName": "Lawrence Ave East at Kingston Rd"
+      },
+      {
+        "stopId": "4423",
+        "stopName": "Lawrence Ave East at Morningside Ave"
+      },
+      {
+        "stopId": "4419",
+        "stopName": "Lawrence Ave East at Ling Rd"
+      },
+      {
+        "stopId": "4418",
+        "stopName": "Lawrence Ave East at Homestead Rd"
+      },
+      {
+        "stopId": "5284",
+        "stopName": "Lawrence Ave East at Manse Rd East Side"
+      },
+      {
+        "stopId": "4425",
+        "stopName": "Lawrence Ave East at Valia Rd"
+      },
+      {
+        "stopId": "4422",
+        "stopName": "Lawrence Ave East at Megan Ave"
+      },
+      {
+        "stopId": "11185",
+        "stopName": "Lawrence Ave East at Morning Dew Rd"
+      },
+      {
+        "stopId": "4414",
+        "stopName": "Lawrence Ave East at Bennett Rd"
+      },
+      {
+        "stopId": "4413",
+        "stopName": "Lawrence Ave East at Beechgrove Dr"
+      },
+      {
+        "stopId": "5291",
+        "stopName": "Lawrence Ave East at Meadowvale Rd East Side"
+      },
+      {
+        "stopId": "5303",
+        "stopName": "Lawrence Ave East at Paulander Ave"
+      },
+      {
+        "stopId": "5251",
+        "stopName": "Lawrence Ave East at Cherryhill Ave"
+      },
+      {
+        "stopId": "16250",
+        "stopName": "Lawrence Ave East at Centennial Rd East Side"
+      },
+      {
+        "stopId": "5250",
+        "stopName": "Lawrence Ave East at Bridgeport Dr"
+      },
+      {
+        "stopId": "5310",
+        "stopName": "Lawrence Ave East at Port Union Rd"
+      },
+      {
+        "stopId": "6530",
+        "stopName": "Rouge Hill GO Station Loop"
+      },
+      {
+        "stopId": "9967",
+        "stopName": "Lawrence Ave East at Stotts Ter"
+      },
+      {
+        "stopId": "9969",
+        "stopName": "Lawrence Ave East at Opposite Walkway to Ridgewood Rd"
+      },
+      {
+        "stopId": "9970",
+        "stopName": "Starspray Loop at Lawrence Ave East"
+      }
+    ]
+  },
+  {
+    "routeId": "63",
+    "routeShortName": "63",
+    "routeLongName": "Ossington",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50815777",
+    "headsign": "South - 63 Ossington towards Liberty Village",
+    "directionId": "0",
+    "stopCount": 71,
+    "firstStop": {
+      "stopId": "9895",
+      "stopName": "Eglinton Ave West at Everden Rd - Cedarvale Station"
+    },
+    "lastStop": {
+      "stopId": "14540",
+      "stopName": "Atlantic Ave at King St West"
+    },
+    "stopSequence": [
+      {
+        "stopId": "9895",
+        "stopName": "Eglinton Ave West at Everden Rd - Cedarvale Station"
+      },
+      {
+        "stopId": "2380",
+        "stopName": "Eglinton Ave West at Marlee Ave"
+      },
+      {
+        "stopId": "5904",
+        "stopName": "Oakwood Ave at Eglinton Ave West South Side"
+      },
+      {
+        "stopId": "5897",
+        "stopName": "Oakwood Ave at Clovelly Ave"
+      },
+      {
+        "stopId": "5905",
+        "stopName": "Oakwood Ave at Vaughan Rd"
+      },
+      {
+        "stopId": "5910",
+        "stopName": "Oakwood Ave at Jesmond Ave"
+      },
+      {
+        "stopId": "5912",
+        "stopName": "Oakwood Ave at Rogers Rd"
+      },
+      {
+        "stopId": "5900",
+        "stopName": "Oakwood Ave at Earlsdale Ave"
+      },
+      {
+        "stopId": "15985",
+        "stopName": "Oakwood Ave at Conway Ave"
+      },
+      {
+        "stopId": "5916",
+        "stopName": "Oakwood Ave at St Clair Ave West"
+      },
+      {
+        "stopId": "5913",
+        "stopName": "Oakwood Ave at Rosemount Ave"
+      },
+      {
+        "stopId": "5908",
+        "stopName": "Oakwood Ave at Highview Cres"
+      },
+      {
+        "stopId": "5898",
+        "stopName": "Oakwood Ave at Davenport Rd"
+      },
+      {
+        "stopId": "5958",
+        "stopName": "Ossington Ave at Davenport Rd South Side"
+      },
+      {
+        "stopId": "5968",
+        "stopName": "Ossington Ave at Salvador Allende Crt South Side"
+      },
+      {
+        "stopId": "13895",
+        "stopName": "Ossington Ave at Dupont St"
+      },
+      {
+        "stopId": "5970",
+        "stopName": "Ossington Ave at Hallam St"
+      },
+      {
+        "stopId": "5977",
+        "stopName": "Ossington Ave at Pendrith St"
+      },
+      {
+        "stopId": "5975",
+        "stopName": "Ossington Ave at Leeds St South Side"
+      },
+      {
+        "stopId": "9857",
+        "stopName": "Ossington Ave at Bloor St West"
+      },
+      {
+        "stopId": "5974",
+        "stopName": "Ossington Ave at Hepbourne St"
+      },
+      {
+        "stopId": "5971",
+        "stopName": "Ossington Ave at Harbord St South Side"
+      },
+      {
+        "stopId": "5960",
+        "stopName": "Ossington Ave at Dewson St South Side"
+      },
+      {
+        "stopId": "5957",
+        "stopName": "Ossington Ave at College St"
+      },
+      {
+        "stopId": "5955",
+        "stopName": "Ossington Ave at Churchill Ave"
+      },
+      {
+        "stopId": "5962",
+        "stopName": "Ossington Ave at Dundas St West"
+      },
+      {
+        "stopId": "5952",
+        "stopName": "Ossington Ave at Argyle St"
+      },
+      {
+        "stopId": "5979",
+        "stopName": "Ossington Ave at Queen St West"
+      },
+      {
+        "stopId": "6850",
+        "stopName": "Queen St West at Shaw St"
+      },
+      {
+        "stopId": "11691",
+        "stopName": "Shaw St at Adelaide St West"
+      },
+      {
+        "stopId": "13624",
+        "stopName": "King St West at Shaw St East Side"
+      },
+      {
+        "stopId": "13625",
+        "stopName": "Strachan Ave at Canniff St"
+      },
+      {
+        "stopId": "14536",
+        "stopName": "Strachan Ave at East Liberty St"
+      },
+      {
+        "stopId": "14537",
+        "stopName": "East Liberty St at Pirandello St West Side"
+      },
+      {
+        "stopId": "14538",
+        "stopName": "East Liberty St at Lynn Williams St"
+      },
+      {
+        "stopId": "14539",
+        "stopName": "Liberty St at Atlantic Ave"
+      },
+      {
+        "stopId": "14540",
+        "stopName": "Atlantic Ave at King St West"
+      }
+    ]
+  },
+  {
+    "routeId": "75",
+    "routeShortName": "75",
+    "routeLongName": "Sherbourne",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50818989",
+    "headsign": "South - 75 Sherbourne towards Queens Quay via South Drive",
+    "directionId": "0",
+    "stopCount": 36,
+    "firstStop": {
+      "stopId": "7309",
+      "stopName": "Sherbourne St at Bloor St East - Sherbourne Station"
+    },
+    "lastStop": {
+      "stopId": "6477",
+      "stopName": "Lower Jarvis St at Queens Quay East North Side"
+    },
+    "stopSequence": [
+      {
+        "stopId": "7309",
+        "stopName": "Sherbourne St at Bloor St East - Sherbourne Station"
+      },
+      {
+        "stopId": "7326",
+        "stopName": "Sherbourne St at Maple Ave"
+      },
+      {
+        "stopId": "6537",
+        "stopName": "Maple Ave at Glen Rd East Side"
+      },
+      {
+        "stopId": "6400",
+        "stopName": "Glen Rd at Elm Ave"
+      },
+      {
+        "stopId": "7335",
+        "stopName": "South Dr at Glen Rd"
+      },
+      {
+        "stopId": "6401",
+        "stopName": "Glen Rd at Elm Ave"
+      },
+      {
+        "stopId": "6373",
+        "stopName": "Elm Ave at Sherbourne St"
+      },
+      {
+        "stopId": "7308",
+        "stopName": "Sherbourne St at Bloor St East South Side - Sherbourne Station"
+      },
+      {
+        "stopId": "7321",
+        "stopName": "Sherbourne St at Isabella St"
+      },
+      {
+        "stopId": "7333",
+        "stopName": "Sherbourne St at Wellesley St East"
+      },
+      {
+        "stopId": "7306",
+        "stopName": "418 Sherbourne St"
+      },
+      {
+        "stopId": "7311",
+        "stopName": "Sherbourne St at Carlton St"
+      },
+      {
+        "stopId": "7319",
+        "stopName": "Sherbourne St at Gerrard St East"
+      },
+      {
+        "stopId": "7313",
+        "stopName": "Sherbourne St at Dundas St East"
+      },
+      {
+        "stopId": "7331",
+        "stopName": "Sherbourne St at Shuter St"
+      },
+      {
+        "stopId": "7328",
+        "stopName": "Sherbourne St at Queen St East"
+      },
+      {
+        "stopId": "7329",
+        "stopName": "Sherbourne St at Richmond St East South Side"
+      },
+      {
+        "stopId": "7323",
+        "stopName": "Sherbourne St at King St East"
+      },
+      {
+        "stopId": "7317",
+        "stopName": "Sherbourne St at Front St East"
+      },
+      {
+        "stopId": "7315",
+        "stopName": "Sherbourne St at The Esplanade"
+      },
+      {
+        "stopId": "14371",
+        "stopName": "Lower Sherbourne St at Queens Quay East"
+      },
+      {
+        "stopId": "6477",
+        "stopName": "Lower Jarvis St at Queens Quay East North Side"
+      }
+    ]
+  },
+  {
+    "routeId": "97",
+    "routeShortName": "97",
+    "routeLongName": "Yonge",
+    "routeType": 3,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50827601",
+    "headsign": "North - 97B Yonge towards Steeles via Yonge Blvd",
+    "directionId": "1",
+    "stopCount": 150,
+    "firstStop": {
+      "stopId": "14818",
+      "stopName": "St Clair Station"
+    },
+    "lastStop": {
+      "stopId": "9176",
+      "stopName": "Steeles Ave East Loop"
+    },
+    "stopSequence": [
+      {
+        "stopId": "14818",
+        "stopName": "St Clair Station"
+      },
+      {
+        "stopId": "4733",
+        "stopName": "Yonge St at St Clair Ave East - St. Clair Station"
+      },
+      {
+        "stopId": "9002",
+        "stopName": "Yonge St at Heath St East"
+      },
+      {
+        "stopId": "10797",
+        "stopName": "Yonge St at Merton St North Side"
+      },
+      {
+        "stopId": "1670",
+        "stopName": "Yonge St at Davisville Ave North Side"
+      },
+      {
+        "stopId": "1667",
+        "stopName": "Yonge St at Belsize Dr"
+      },
+      {
+        "stopId": "1672",
+        "stopName": "Yonge St at Manor Rd East"
+      },
+      {
+        "stopId": "1674",
+        "stopName": "Yonge St at Soudan Ave"
+      },
+      {
+        "stopId": "15708",
+        "stopName": "Opposite 2190 Yonge St"
+      },
+      {
+        "stopId": "8977",
+        "stopName": "Yonge St at Eglinton Ave East - Eglinton Station"
+      },
+      {
+        "stopId": "8980",
+        "stopName": "Yonge St at Eglinton Ave East North Side - Eglinton Station"
+      },
+      {
+        "stopId": "8961",
+        "stopName": "Yonge St at Broadway Ave"
+      },
+      {
+        "stopId": "8965",
+        "stopName": "Yonge St at Castlefield Ave"
+      },
+      {
+        "stopId": "9051",
+        "stopName": "Yonge St at Sherwood Ave"
+      },
+      {
+        "stopId": "8959",
+        "stopName": "Yonge St at Blythwood Rd"
+      },
+      {
+        "stopId": "8997",
+        "stopName": "Yonge St at Glengrove Ave East"
+      },
+      {
+        "stopId": "9054",
+        "stopName": "Yonge St at St Edmund's Dr"
+      },
+      {
+        "stopId": "9019",
+        "stopName": "Yonge St at Lawrence Ave East North Side - Lawrence Station"
+      },
+      {
+        "stopId": "9038",
+        "stopName": "Yonge St at Ranleigh Ave"
+      },
+      {
+        "stopId": "8996",
+        "stopName": "Yonge St at Glenforest Rd North Side"
+      },
+      {
+        "stopId": "8949",
+        "stopName": "Yonge Blvd at Yonge St West Side"
+      },
+      {
+        "stopId": "8937",
+        "stopName": "Yonge Blvd at Brooke Ave"
+      },
+      {
+        "stopId": "8942",
+        "stopName": "Yonge Blvd at Felbrigg Ave"
+      },
+      {
+        "stopId": "8944",
+        "stopName": "Yonge Blvd at Harley Ave"
+      },
+      {
+        "stopId": "8939",
+        "stopName": "Yonge Blvd at Dunster Ave North Side"
+      },
+      {
+        "stopId": "8948",
+        "stopName": "Yonge Blvd at Wilson Ave"
+      },
+      {
+        "stopId": "9065",
+        "stopName": "Yonge St at York Mills Rd North Side - York Mills Station"
+      },
+      {
+        "stopId": "8963",
+        "stopName": "Yonge St at William Carson Cres"
+      },
+      {
+        "stopId": "9022",
+        "stopName": "Yonge St at Lord Seaton Rd"
+      },
+      {
+        "stopId": "13559",
+        "stopName": "Yonge St at Avondale Ave North Side"
+      },
+      {
+        "stopId": "9048",
+        "stopName": "Yonge St at Sheppard Ave East North Side - Sheppard Station"
+      },
+      {
+        "stopId": "11494",
+        "stopName": "Yonge St at Elmwood Ave"
+      },
+      {
+        "stopId": "8984",
+        "stopName": "Yonge St at Empress Ave - North York Centre Station"
+      },
+      {
+        "stopId": "9032",
+        "stopName": "Yonge St at Norton Ave"
+      },
+      {
+        "stopId": "8970",
+        "stopName": "Yonge St at Church Ave"
+      },
+      {
+        "stopId": "8962",
+        "stopName": "Yonge St at Byng Ave"
+      },
+      {
+        "stopId": "8988",
+        "stopName": "Yonge St at Finch Ave East"
+      },
+      {
+        "stopId": "14689",
+        "stopName": "Finch Station"
+      },
+      {
+        "stopId": "15282",
+        "stopName": "Yonge St at Bishop Ave North Side"
+      },
+      {
+        "stopId": "14447",
+        "stopName": "5799 Yonge St"
+      },
+      {
+        "stopId": "8975",
+        "stopName": "Yonge St at Cummer Ave"
+      },
+      {
+        "stopId": "9034",
+        "stopName": "Yonge St at Patricia Ave"
+      },
+      {
+        "stopId": "12003",
+        "stopName": "Moore Park Ave at Yonge St West Side"
+      },
+      {
+        "stopId": "12043",
+        "stopName": "34 Moore Park Ave"
+      },
+      {
+        "stopId": "12044",
+        "stopName": "Moore Park Ave at Fargo Ave"
+      },
+      {
+        "stopId": "12045",
+        "stopName": "Hilda Ave at Moore Park Ave North Side"
+      },
+      {
+        "stopId": "12046",
+        "stopName": "Hilda Ave at Green Bush Rd"
+      },
+      {
+        "stopId": "12004",
+        "stopName": "Hilda Ave at Steeles Ave West"
+      },
+      {
+        "stopId": "8309",
+        "stopName": "Steeles Ave West at Tangreen Crt"
+      },
+      {
+        "stopId": "8299",
+        "stopName": "Steeles Ave West at Yonge St - Centerpoint Mall"
+      },
+      {
+        "stopId": "9176",
+        "stopName": "Steeles Ave East Loop"
+      }
+    ]
+  },
+  {
+    "routeId": "501",
+    "routeShortName": "501",
+    "routeLongName": "Queen",
+    "routeType": 0,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50808903",
+    "headsign": "East - 501 Queen towards Neville Park",
+    "directionId": "0",
+    "stopCount": 122,
+    "firstStop": {
+      "stopId": "6523",
+      "stopName": "Humber Loop at The Queensway"
+    },
+    "lastStop": {
+      "stopId": "11683",
+      "stopName": "Queen St East at Neville Park Blvd"
+    },
+    "stopSequence": [
+      {
+        "stopId": "6523",
+        "stopName": "Humber Loop at The Queensway"
+      },
+      {
+        "stopId": "6916",
+        "stopName": "The Queensway at South Kingsway"
+      },
+      {
+        "stopId": "14282",
+        "stopName": "The Queensway at Windermere Ave East Side"
+      },
+      {
+        "stopId": "14281",
+        "stopName": "The Queensway at Ellis Ave East Side"
+      },
+      {
+        "stopId": "14280",
+        "stopName": "The Queensway at Colborne Lodge Dr East Side"
+      },
+      {
+        "stopId": "6908",
+        "stopName": "The Queensway at Parkside Dr"
+      },
+      {
+        "stopId": "6888",
+        "stopName": "The Queensway at Glendale Ave East Side - St Joseph's Health Centre"
+      },
+      {
+        "stopId": "16429",
+        "stopName": "Queen St West at Roncesvalles Ave East Side"
+      },
+      {
+        "stopId": "15341",
+        "stopName": "Queen St West at Triller Ave"
+      },
+      {
+        "stopId": "10152",
+        "stopName": "Queen St West at Beaty Ave"
+      },
+      {
+        "stopId": "6840",
+        "stopName": "Queen St West at Jameson Ave"
+      },
+      {
+        "stopId": "6835",
+        "stopName": "Queen St West at Dunn Ave"
+      },
+      {
+        "stopId": "6836",
+        "stopName": "Queen St West at Brock Ave"
+      },
+      {
+        "stopId": "6834",
+        "stopName": "Queen St West at Dufferin St"
+      },
+      {
+        "stopId": "15348",
+        "stopName": "Queen St West at Sudbury St"
+      },
+      {
+        "stopId": "6831",
+        "stopName": "Queen St West at Dovercourt Rd"
+      },
+      {
+        "stopId": "6846",
+        "stopName": "Queen St West at Ossington Ave"
+      },
+      {
+        "stopId": "6850",
+        "stopName": "Queen St West at Shaw St"
+      },
+      {
+        "stopId": "6854",
+        "stopName": "Queen St West at Strachan Ave"
+      },
+      {
+        "stopId": "6844",
+        "stopName": "Queen St West at Niagara St"
+      },
+      {
+        "stopId": "6856",
+        "stopName": "Queen St West at Tecumseth St"
+      },
+      {
+        "stopId": "6827",
+        "stopName": "Queen St West at Bathurst St"
+      },
+      {
+        "stopId": "6826",
+        "stopName": "Queen St West at Augusta Ave"
+      },
+      {
+        "stopId": "6853",
+        "stopName": "Queen St West at Spadina Ave"
+      },
+      {
+        "stopId": "6829",
+        "stopName": "Queen St West at Peter St"
+      },
+      {
+        "stopId": "6841",
+        "stopName": "Queen St West at John St"
+      },
+      {
+        "stopId": "6858",
+        "stopName": "Queen St West at University Ave - Osgoode Station"
+      },
+      {
+        "stopId": "16716",
+        "stopName": "York St at Adelaide St West"
+      },
+      {
+        "stopId": "16578",
+        "stopName": "Adelaide St West at Yonge St - King Station"
+      },
+      {
+        "stopId": "12314",
+        "stopName": "Church St at Queen St East"
+      },
+      {
+        "stopId": "3050",
+        "stopName": "Queen St East at Jarvis St"
+      },
+      {
+        "stopId": "3070",
+        "stopName": "Queen St East at Sherbourne St"
+      },
+      {
+        "stopId": "3060",
+        "stopName": "Queen St East at Ontario St"
+      },
+      {
+        "stopId": "3064",
+        "stopName": "Queen St East at Parliament St"
+      },
+      {
+        "stopId": "3068",
+        "stopName": "Queen St East at Sackville St"
+      },
+      {
+        "stopId": "3073",
+        "stopName": "Queen St East at Sumach St"
+      },
+      {
+        "stopId": "3066",
+        "stopName": "Queen St East at River St"
+      },
+      {
+        "stopId": "3038",
+        "stopName": "Queen St East at Carroll St"
+      },
+      {
+        "stopId": "3032",
+        "stopName": "Queen St East at Broadview Ave"
+      },
+      {
+        "stopId": "3072",
+        "stopName": "Queen St East at Saulter St East Side"
+      },
+      {
+        "stopId": "3046",
+        "stopName": "Queen St East at Empire Ave"
+      },
+      {
+        "stopId": "3058",
+        "stopName": "Queen St East at Logan Ave"
+      },
+      {
+        "stopId": "3035",
+        "stopName": "Queen St East at Carlaw Ave"
+      },
+      {
+        "stopId": "3062",
+        "stopName": "Queen St East at Pape Ave"
+      },
+      {
+        "stopId": "3037",
+        "stopName": "Queen St East at Caroline Ave"
+      },
+      {
+        "stopId": "3030",
+        "stopName": "Queen St East at Jones Ave"
+      },
+      {
+        "stopId": "3056",
+        "stopName": "Queen St East at Leslie St"
+      },
+      {
+        "stopId": "15699",
+        "stopName": "Queen St East at Alton Ave"
+      },
+      {
+        "stopId": "3048",
+        "stopName": "Queen St East at Greenwood Ave"
+      },
+      {
+        "stopId": "15336",
+        "stopName": "Queen St East at Woodfield Rd"
+      },
+      {
+        "stopId": "4557",
+        "stopName": "Queen St East at Emdaabiimok Ave"
+      },
+      {
+        "stopId": "11845",
+        "stopName": "Queen St East at Kingston Rd"
+      },
+      {
+        "stopId": "6810",
+        "stopName": "Queen St East at Sarah Ashbridge Ave"
+      },
+      {
+        "stopId": "6824",
+        "stopName": "Queen St East at Woodbine Ave"
+      },
+      {
+        "stopId": "15342",
+        "stopName": "Queen St East at Elmer Ave"
+      },
+      {
+        "stopId": "15338",
+        "stopName": "Queen St East at Bellefair Ave"
+      },
+      {
+        "stopId": "16520",
+        "stopName": "Queen St East at Wineva Ave East Side"
+      },
+      {
+        "stopId": "15344",
+        "stopName": "Queen St East at Glen Manor Dr"
+      },
+      {
+        "stopId": "6801",
+        "stopName": "Queen St East at Beech Ave"
+      },
+      {
+        "stopId": "10158",
+        "stopName": "Queen St East at Silver Birch Ave"
+      },
+      {
+        "stopId": "11683",
+        "stopName": "Queen St East at Neville Park Blvd"
+      }
+    ]
+  },
+  {
+    "routeId": "504",
+    "routeShortName": "504",
+    "routeLongName": "King",
+    "routeType": 0,
+    "officialRouteColor": "#ED1C24",
+    "representativeTripId": "50809477",
+    "headsign": "East - 504A King towards Distillery",
+    "directionId": "0",
+    "stopCount": 107,
+    "firstStop": {
+      "stopId": "14665",
+      "stopName": "Dundas West Station"
+    },
+    "lastStop": {
+      "stopId": "15462",
+      "stopName": "Distillery Loop"
+    },
+    "stopSequence": [
+      {
+        "stopId": "14665",
+        "stopName": "Dundas West Station"
+      },
+      {
+        "stopId": "9855",
+        "stopName": "Edna Ave at Dundas St West"
+      },
+      {
+        "stopId": "9856",
+        "stopName": "Dundas St West at Bloor St West"
+      },
+      {
+        "stopId": "4569",
+        "stopName": "Roncesvalles Ave at Boustead Ave South Side"
+      },
+      {
+        "stopId": "15039",
+        "stopName": "Roncesvalles Ave at Howard Park Ave South Side"
+      },
+      {
+        "stopId": "14994",
+        "stopName": "Roncesvalles Ave at Grenadier Rd"
+      },
+      {
+        "stopId": "14993",
+        "stopName": "Roncesvalles Ave at High Park Blvd South Side"
+      },
+      {
+        "stopId": "4573",
+        "stopName": "Roncesvalles Ave at Galley Ave"
+      },
+      {
+        "stopId": "14992",
+        "stopName": "Roncesvalles Ave at Marion St South Side"
+      },
+      {
+        "stopId": "4582",
+        "stopName": "Roncesvalles Ave at Queen St West"
+      },
+      {
+        "stopId": "4194",
+        "stopName": "King St West at Wilson Park Rd"
+      },
+      {
+        "stopId": "4164",
+        "stopName": "King St West at Dowling Ave"
+      },
+      {
+        "stopId": "4173",
+        "stopName": "King St West at Jameson Ave"
+      },
+      {
+        "stopId": "4168",
+        "stopName": "King St West at Dunn Ave"
+      },
+      {
+        "stopId": "4186",
+        "stopName": "King St West at Spencer Ave"
+      },
+      {
+        "stopId": "4167",
+        "stopName": "King St West at Dufferin St"
+      },
+      {
+        "stopId": "15353",
+        "stopName": "King St West at Joe Shuster Way"
+      },
+      {
+        "stopId": "4155",
+        "stopName": "King St West at Atlantic Ave"
+      },
+      {
+        "stopId": "13344",
+        "stopName": "King St West at Sudbury St"
+      },
+      {
+        "stopId": "4162",
+        "stopName": "King St West at Shaw St"
+      },
+      {
+        "stopId": "4187",
+        "stopName": "King St West at Strachan Ave"
+      },
+      {
+        "stopId": "4178",
+        "stopName": "King St West at Niagara St"
+      },
+      {
+        "stopId": "4189",
+        "stopName": "King St West at Tecumseth St"
+      },
+      {
+        "stopId": "15650",
+        "stopName": "King St West at Bathurst St East Side"
+      },
+      {
+        "stopId": "15649",
+        "stopName": "King St West at Portland St East Side"
+      },
+      {
+        "stopId": "15648",
+        "stopName": "King St West at Spadina Ave East Side"
+      },
+      {
+        "stopId": "15646",
+        "stopName": "King St West at Blue Jays Way East Side"
+      },
+      {
+        "stopId": "15644",
+        "stopName": "King St West at John St East Side"
+      },
+      {
+        "stopId": "15642",
+        "stopName": "King St West at York St - St Andrew Station"
+      },
+      {
+        "stopId": "15640",
+        "stopName": "King St West at Bay St East Side"
+      },
+      {
+        "stopId": "15638",
+        "stopName": "King St West at Yonge St East Side - King Station"
+      },
+      {
+        "stopId": "12537",
+        "stopName": "King St East at Church St East Side"
+      },
+      {
+        "stopId": "15636",
+        "stopName": "King St West at Jarvis St East Side"
+      },
+      {
+        "stopId": "4145",
+        "stopName": "King St East at Sherbourne St"
+      },
+      {
+        "stopId": "15352",
+        "stopName": "King St East at Ontario St"
+      },
+      {
+        "stopId": "4140",
+        "stopName": "King St East at Parliament St"
+      },
+      {
+        "stopId": "4143",
+        "stopName": "King St East at Sackville St"
+      },
+      {
+        "stopId": "4148",
+        "stopName": "King St East at Sumach St"
+      },
+      {
+        "stopId": "15461",
+        "stopName": "Cherry St at Front St East"
+      },
+      {
+        "stopId": "15462",
+        "stopName": "Distillery Loop"
+      }
+    ]
+  }
+]

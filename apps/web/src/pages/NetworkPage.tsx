@@ -1,28 +1,37 @@
-import { Compass, Minus, Plus, Search } from 'lucide-react'
+import { useState } from 'react'
+import type * as maplibregl from 'maplibre-gl'
+import { Compass, Minus, Plus } from 'lucide-react'
 import { NetworkMap } from '@/features/network/components/NetworkMap'
+import { RouteInspector } from '@/features/network/components/RouteInspector'
+import { useRouteSelection } from '@/features/network/hooks/useRouteSelection'
 
 export function NetworkPage() {
+  const [map, setMap] = useState<maplibregl.Map | null>(null)
+  const { selectedRouteId, selectedRoute, selectRoute, selectedStopId, selectedStop, selectStop } = useRouteSelection()
+
   return (
     <section className="network-page" aria-label="Network workspace">
-      <NetworkMap />
+      <NetworkMap onMapReady={setMap} selectedRouteId={selectedRouteId} onRouteSelect={selectRoute} selectedStopId={selectedStopId} onStopSelect={selectStop} />
 
-      <div className="network-status" aria-label="Operational status">
-        <time dateTime="08:42:17">08:42:17</time>
-        <span className="live-status"><span aria-hidden="true" />LIVE</span>
-      </div>
+      <aside className="network-inspector-placeholder" aria-label="Route inspector">
+        <RouteInspector route={selectedRoute} selectedStopId={selectedStopId} />
+      </aside>
 
-      <div className="network-search" role="search" aria-label="Network search">
-        <Search size={15} strokeWidth={1.5} aria-hidden="true" />
-        <span>Search routes, stops, or vehicles…</span>
-        <kbd>⌘ K</kbd>
-      </div>
+      {selectedStop && (
+        <aside className="stop-callout" aria-label="Selected stop">
+          <strong>{selectedStop.stopName}</strong>
+          <span>Routes: {selectedStop.routeShortNames.join(', ')}</span>
+        </aside>
+      )}
 
-      <aside className="network-inspector-placeholder" aria-label="Reserved route inspector area" />
-
-      <div className="network-map-controls" aria-label="Reserved map controls">
-        <span className="network-compass"><Compass size={16} strokeWidth={1.4} aria-hidden="true" /></span>
-        <span><Plus size={16} strokeWidth={1.5} aria-hidden="true" /></span>
-        <span><Minus size={16} strokeWidth={1.5} aria-hidden="true" /></span>
+      <div className="network-map-controls" aria-label="Map controls">
+        <button type="button" className="network-compass" onClick={() => map?.resetNorth()} disabled={!map} aria-label="Reset map bearing">
+          <Compass size={16} strokeWidth={1.4} aria-hidden="true" />
+        </button>
+        <div className="network-zoom-controls">
+          <button type="button" onClick={() => map?.zoomIn()} disabled={!map} aria-label="Zoom in"><Plus size={16} strokeWidth={1.5} aria-hidden="true" /></button>
+          <button type="button" onClick={() => map?.zoomOut()} disabled={!map} aria-label="Zoom out"><Minus size={16} strokeWidth={1.5} aria-hidden="true" /></button>
+        </div>
       </div>
 
       <div className="network-playback-placeholder" aria-label="Reserved playback rail">
