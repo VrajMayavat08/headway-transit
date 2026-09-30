@@ -1,0 +1,12 @@
+{
+  "name": "headway-transit",
+  "private": true,
+  "version": "0.0.0",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "dev": "npm run dev --workspace @headway/web --",
+    "build": "npm run build --workspace @headway/web",
+    "typecheck": "npm run typecheck --workspace @headway/web",
+    "preview": "npm run preview --workspace @headway/web --"
+  }
+}

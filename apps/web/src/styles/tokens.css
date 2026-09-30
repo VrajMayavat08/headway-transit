@@ -1,0 +1,15 @@
+:root {
+  color-scheme: dark;
+  --color-background: #191c1e;
+  --color-text: #eeeade;
+  --color-muted: #a3aaae;
+  --color-separator: #373e43;
+  --color-active: #292f33;
+  --radius-small: 3px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --rail-width: 52px;
+}

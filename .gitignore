@@ -1,0 +1,13 @@
+node_modules/
+dist/
+*.tsbuildinfo
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+data/imports/*
+!data/imports/.gitkeep
+data/archive/*
+!data/archive/.gitkeep
