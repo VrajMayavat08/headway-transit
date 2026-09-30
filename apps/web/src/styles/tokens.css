@@ -1,10 +1,17 @@
 :root {
   color-scheme: dark;
-  --color-background: #191c1e;
-  --color-text: #eeeade;
-  --color-muted: #a3aaae;
-  --color-separator: #373e43;
-  --color-active: #292f33;
+  --color-bg: #111817;
+  --color-surface: #151d1b;
+  --color-raised: #1a2321;
+  --color-border: #2a3532;
+  --color-text: #f1eee5;
+  --color-muted: color-mix(in srgb, var(--color-text) 62%, var(--color-bg));
+  --color-background: var(--color-bg);
+  --color-separator: var(--color-border);
+  --color-active: var(--color-raised);
+  --color-live: #f05a5d;
+  --color-control-text: color-mix(in srgb, var(--color-text) 91%, var(--color-bg));
+  --color-playback-track: color-mix(in srgb, var(--color-text) 36%, var(--color-bg));
   --radius-small: 3px;
   --space-1: 4px;
   --space-2: 8px;
