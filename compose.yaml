@@ -1,0 +1,21 @@
+services:
+  database:
+    image: postgis/postgis:17-3.5
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-headway}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-headway_dev}
+      POSTGRES_DB: ${POSTGRES_DB:-headway}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - headway-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+volumes:
+  headway-postgres-data:

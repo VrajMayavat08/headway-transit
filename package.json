@@ -5,8 +5,12 @@
   "workspaces": ["apps/*"],
   "scripts": {
     "dev": "npm run dev --workspace @headway/web --",
-    "build": "npm run build --workspace @headway/web",
-    "typecheck": "npm run typecheck --workspace @headway/web",
+    "dev:api": "npm run dev --workspace @headway/api --",
+    "db:up": "docker compose up -d database",
+    "db:down": "docker compose down",
+    "db:migrate": "npm run migrate --workspace @headway/api",
+    "build": "npm run build --workspace @headway/web && npm run build --workspace @headway/api",
+    "typecheck": "npm run typecheck --workspace @headway/web && npm run typecheck --workspace @headway/api",
     "preview": "npm run preview --workspace @headway/web --"
   }
 }
