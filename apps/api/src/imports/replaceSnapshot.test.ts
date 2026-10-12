@@ -16,3 +16,13 @@ test('deletes trips before stops so PostgreSQL cascades their stop times', async
   assert.equal(queries.some(({ text }) => text.startsWith('DELETE FROM stop_times')), false)
   assert.ok(queries.findIndex(({ text }) => text.startsWith('DELETE FROM trips')) < queries.findIndex(({ text }) => text.startsWith('DELETE FROM stops')))
 })
+
+test('targets only the requested source key when replacing a snapshot', async () => {
+  const queries: Array<{ text: string; values?: unknown[] }> = []
+  const client = { query: async (text: string, values?: unknown[]) => { queries.push({ text, values }) } }
+
+  await deleteFeedSnapshot(client as never, 'ttc-surface')
+
+  assert.ok(queries.every(({ values }) => values?.[0] === 'ttc-surface'))
+  assert.equal(queries.some(({ values }) => values?.includes('ttc-static')), false)
+})

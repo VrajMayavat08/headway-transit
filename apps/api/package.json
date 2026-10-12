@@ -7,20 +7,23 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "tsx --test src/imports/replaceSnapshot.test.ts",
+    "test": "tsx --test src/imports/replaceSnapshot.test.ts src/imports/ttcGtfsImportConfig.test.ts src/schedules/routesEndpoint.test.ts src/schedules/routeStopsEndpoint.test.ts src/schedules/routeGeometryEndpoint.test.ts src/realtime/ttcVehiclePositions.test.ts src/realtime/ttcIdentifierCompatibility.test.ts src/realtime/vehicleObservations.test.ts src/realtime/ttcVehicleCollector.test.ts src/realtime/vehiclesEndpoint.test.ts",
     "migrate": "tsx src/db/migrate.ts",
-    "import:ttc-gtfs": "tsx src/imports/import-ttc-gtfs.ts"
+    "import:ttc-gtfs": "tsx src/imports/import-ttc-gtfs.ts",
+    "import:ttc-surface-gtfs": "tsx src/imports/import-ttc-gtfs.ts --surface",
+    "check:ttc-identifier-compatibility": "tsx src/realtime/check-ttc-identifier-compatibility.ts"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",
     "dotenv": "^16.6.1",
     "fastify": "^5.8.2",
+    "gtfs-realtime-bindings": "^2.2.0",
     "pg": "^8.16.3"
   },
   "devDependencies": {
     "@types/node": "^24.5.2",
-    "adm-zip": "^0.5.16",
     "@types/pg": "^8.15.5",
+    "adm-zip": "^0.6.1",
     "tsx": "^4.20.5",
     "typescript": "^5.9.3"
   }

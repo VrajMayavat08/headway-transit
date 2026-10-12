@@ -2,46 +2,50 @@ import { useEffect, useRef } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { getRouteDisplayColor } from '@/features/network/data/routeDisplayColors'
-import { getTtcSurfaceRouteGeometry, ttcSurfaceRouteCollection } from '@/features/network/data/ttcSurfaceRoutes'
+import type { ScheduleRouteGeometry } from '@/features/routes/api/routes'
 import { applyHeadwayBasemapPalette, darkBasemapStyle } from '@/features/network/lib/mapStyle'
 
-type RouteMapProps = { routeId: string | null }
-
-function routeFeatureCollection(routeId: string | null) {
-  return {
-    type: 'FeatureCollection' as const,
-    features: ttcSurfaceRouteCollection.features.filter(
-      (feature) => feature.geometry.type === 'LineString' && feature.properties.routeId === routeId,
-    ),
-  }
+type RouteMapProps = {
+  routeId: string | null
+  geometry: ScheduleRouteGeometry | undefined
+  isLoading: boolean
+  isError: boolean
 }
 
-function fitRoute(map: maplibregl.Map, routeId: string | null) {
-  const coordinates = getTtcSurfaceRouteGeometry(routeId)
-  if (!coordinates?.length) return
+const emptyGeometry: ScheduleRouteGeometry = { type: 'FeatureCollection', features: [] }
+
+function geometrySourceData(geometry: ScheduleRouteGeometry | undefined) {
+  return (geometry ?? emptyGeometry) as maplibregl.GeoJSONSourceSpecification['data']
+}
+
+function fitRoute(map: maplibregl.Map, geometry: ScheduleRouteGeometry | undefined) {
+  const coordinates = geometry?.features.flatMap((feature) => feature.geometry.coordinates) ?? []
+  if (!coordinates.length) return
 
   const bounds = coordinates.reduce(
-    (current, coordinate) => current.extend(coordinate as [number, number]),
-    new maplibregl.LngLatBounds(coordinates[0] as [number, number], coordinates[0] as [number, number]),
+    (current, coordinate) => current.extend(coordinate),
+    new maplibregl.LngLatBounds(coordinates[0], coordinates[0]),
   )
   map.fitBounds(bounds, { padding: 42, maxZoom: 14, duration: 0 })
 }
 
-export function RouteMap({ routeId }: RouteMapProps) {
+export function RouteMap({ routeId, geometry, isLoading, isError }: RouteMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const routeIdRef = useRef(routeId)
+  const geometryRef = useRef(geometry)
 
   useEffect(() => { routeIdRef.current = routeId }, [routeId])
+  useEffect(() => { geometryRef.current = geometry }, [geometry])
 
   useEffect(() => {
     const map = mapRef.current
     if (!map?.isStyleLoaded()) return
     const source = map.getSource('selected-ttc-route') as maplibregl.GeoJSONSource | undefined
-    source?.setData(routeFeatureCollection(routeId) as maplibregl.GeoJSONSourceSpecification['data'])
+    source?.setData(geometrySourceData(geometry))
     map.setPaintProperty('selected-ttc-route', 'line-color', getRouteDisplayColor(routeId ?? ''))
-    fitRoute(map, routeId)
-  }, [routeId])
+    fitRoute(map, geometry)
+  }, [geometry, routeId])
 
   useEffect(() => {
     const container = mapContainer.current
@@ -61,7 +65,7 @@ export function RouteMap({ routeId }: RouteMapProps) {
       applyHeadwayBasemapPalette(map)
       map.addSource('selected-ttc-route', {
         type: 'geojson',
-        data: routeFeatureCollection(routeIdRef.current) as maplibregl.GeoJSONSourceSpecification['data'],
+        data: geometrySourceData(geometryRef.current),
       })
       map.addLayer({
         id: 'selected-ttc-route-shadow',
@@ -77,7 +81,7 @@ export function RouteMap({ routeId }: RouteMapProps) {
         paint: { 'line-color': getRouteDisplayColor(routeIdRef.current ?? ''), 'line-width': 3.5 },
         layout: { 'line-cap': 'round', 'line-join': 'round' },
       })
-      fitRoute(map, routeIdRef.current)
+      fitRoute(map, geometryRef.current)
     })
 
     return () => {
@@ -86,5 +90,18 @@ export function RouteMap({ routeId }: RouteMapProps) {
     }
   }, [])
 
-  return <div ref={mapContainer} className="route-map" aria-label="Selected TTC route map" />
+  const status = isLoading
+    ? 'Loading scheduled geometry.'
+    : isError
+      ? 'Route geometry is unavailable.'
+      : geometry && geometry.features.length === 0
+        ? 'No scheduled geometry is available for this route.'
+        : null
+
+  return (
+    <div className="route-map">
+      <div ref={mapContainer} className="route-map-canvas" aria-label="Selected TTC route map" />
+      {status && <p className="route-map-status">{status}</p>}
+    </div>
+  )
 }

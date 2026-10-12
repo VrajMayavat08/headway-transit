@@ -30,7 +30,27 @@ The static schedule schema stores feed imports, agencies, routes, stops, trips, 
 
 Place the ignored local TTC archive at `data/imports/ttc-static-gtfs.zip`, then run `npm run import:ttc-gtfs --workspace @headway/api`. The importer replaces the prior TTC schedule snapshot in one transaction while retaining other agency feeds. It reports inserted row counts; database counts can be inspected with `SELECT count(*) FROM routes`, `stops`, `trips`, `stop_times`, and `shapes` after import.
 
+For TTC BusTime vehicle matching, download `SurfaceGTFS.zip` yourself to the ignored `data/imports/ttc-surface-gtfs.zip`, then run `npm run import:ttc-surface-gtfs --workspace @headway/api`. This creates or replaces only the separate `ttc-surface` snapshot; existing schedule endpoints continue to read `ttc-static`.
+
 Static schedules are distinct from future GTFS-Realtime observations. Vehicle telemetry will be retained with bounded local storage; it is not collected or stored by this importer.
+
+## TTC vehicle observations
+
+Migration `003_realtime_vehicle_observations.sql` adds timestamped TTC vehicle snapshots and observations. The collector is disabled by default. After importing the separate `ttc-surface` snapshot, set `TTC_VEHICLE_COLLECTOR_ENABLED=true` to enable it locally. `TTC_VEHICLE_POLL_INTERVAL_SECONDS` defaults to 60 and cannot be lower than 30; `TTC_VEHICLE_STALE_AFTER_SECONDS` defaults to 180. `TTC_VEHICLE_RETENTION_HOURS` defaults to 168 and bounds local snapshot history. A failed fetch leaves the last stored snapshot intact. `GET /api/realtime/vehicles` returns `empty`, `current`, or `stale` according to the latest stored snapshot.
+
+## Schedule API
+
+`GET /api/routes` returns the routes from the currently imported TTC static feed, naturally ordered by route short name. It returns an empty array when no TTC routes have been imported. Each entry has this shape:
+
+```json
+{
+  "routeId": "29",
+  "shortName": "29",
+  "longName": "Dufferin",
+  "routeType": "3",
+  "color": "ED1C24"
+}
+```
 
 ## Repository boundaries
 

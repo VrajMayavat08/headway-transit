@@ -10,4 +10,12 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['maplibre-gl'],
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: process.env.HEADWAY_API_URL ?? 'http://127.0.0.1:3001',
+        changeOrigin: true,
+      },
+    },
+  },
 })

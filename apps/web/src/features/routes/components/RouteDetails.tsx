@@ -1,44 +1,68 @@
 import type { CSSProperties } from 'react'
-import type { TtcSurfaceRoute } from '@/features/network/data/ttcSurfaceRoutes'
-import type { TtcSurfaceRouteProfile } from '@/features/network/data/ttcSurfaceRouteProfiles'
 import { getRouteDisplayColor } from '@/features/network/data/routeDisplayColors'
+import type { ScheduleRoute, ScheduleRouteStops } from '@/features/routes/api/routes'
 
-type RouteDetailsProps = { route: TtcSurfaceRoute | null; profile: TtcSurfaceRouteProfile | null }
-
-function routeTypeName(routeType: number) {
-  return routeType === 0 ? 'Streetcar' : 'Bus'
+type RouteDetailsProps = {
+  route: ScheduleRoute | null
+  routeStops: ScheduleRouteStops | undefined
+  isStopsLoading: boolean
+  isStopsError: boolean
 }
 
-export function RouteDetails({ route, profile }: RouteDetailsProps) {
-  if (!route || !profile) return null
+function routeTypeName(routeType: string) {
+  const routeTypes: Record<string, string> = {
+    '0': 'Streetcar',
+    '1': 'Subway',
+    '2': 'Rail',
+    '3': 'Bus',
+  }
+
+  return routeTypes[routeType] ?? `GTFS type ${routeType}`
+}
+
+export function RouteDetails({ route, routeStops, isStopsLoading, isStopsError }: RouteDetailsProps) {
+  if (!route) {
+    return <section className="route-details route-details-empty" aria-label="Route details">Select a route to inspect its schedule metadata.</section>
+  }
   const accent = getRouteDisplayColor(route.routeId)
 
   return (
     <section className="route-details" style={{ '--route-accent': accent } as CSSProperties} aria-labelledby="route-details-title">
       <header className="route-details-header">
         <span>ROUTE</span>
-        <h1 id="route-details-title">{route.routeShortName}</h1>
-        <h2>{route.routeLongName}</h2>
+        <h1 id="route-details-title">{route.shortName ?? route.routeId}</h1>
+        <h2>{route.longName ?? 'UNNAMED ROUTE'}</h2>
         <small>SCHEDULED NETWORK</small>
       </header>
       <dl className="route-details-metadata">
         <div><dt>MODE</dt><dd>{routeTypeName(route.routeType)}</dd></div>
-        {profile.headsign && <div><dt>HEADSIGN</dt><dd>{profile.headsign}</dd></div>}
-        <div><dt>FIRST STOP</dt><dd>{profile.firstStop?.stopName ?? 'Unavailable'}</dd></div>
-        <div><dt>LAST STOP</dt><dd>{profile.lastStop?.stopName ?? 'Unavailable'}</dd></div>
-        <div><dt>STOPS</dt><dd>{profile.stopCount}</dd></div>
       </dl>
-      <section className="route-stop-list" aria-labelledby="route-stop-list-title">
-        <h3 id="route-stop-list-title">STOP SEQUENCE</h3>
-        <ol>
-          {profile.stopSequence.map((stop, index) => (
-            <li key={`${stop.stopId}-${index}`}>
-              <span aria-hidden="true" />
-              <span>{stop.stopName}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
+      {isStopsLoading ? <p className="route-details-unavailable">Loading scheduled stop patterns.</p>
+        : isStopsError ? <p className="route-details-unavailable">Scheduled stop patterns are unavailable.</p>
+          : routeStops && routeStops.patterns.length > 0 ? (
+        <section className="route-stop-list" aria-labelledby="route-stop-list-title">
+          <h3 id="route-stop-list-title">REPRESENTATIVE STOP PATTERNS</h3>
+          <div className="route-stop-patterns">
+            {routeStops.patterns.map((pattern) => (
+              <section className="route-stop-pattern" key={`${pattern.directionId ?? 'unset'}-${pattern.tripId}`}>
+                <p>
+                  <strong>{pattern.directionId === null ? 'DIRECTION UNSET' : `DIRECTION ${pattern.directionId}`}</strong>
+                  <span>{pattern.headsign ?? 'No headsign'}</span>
+                  <small>TRIP {pattern.tripId} · {pattern.tripCount} matching trips</small>
+                </p>
+                <ol>
+                  {pattern.stops.map((stop) => (
+                    <li key={`${stop.stopId}-${stop.sequence}`}>
+                      <span aria-hidden="true" />
+                      <span>{stop.stopName ?? stop.stopId}</span>
+                    </li>
+                  ))}
+                </ol>
+              </section>
+            ))}
+          </div>
+        </section>
+      ) : <p className="route-details-unavailable">No scheduled stop patterns are available for this route.</p>}
     </section>
   )
 }

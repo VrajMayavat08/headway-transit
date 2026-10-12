@@ -1,16 +1,18 @@
 import type { CSSProperties, ChangeEvent } from 'react'
-import type { TtcSurfaceRoute } from '@/features/network/data/ttcSurfaceRoutes'
 import { getRouteDisplayColor } from '@/features/network/data/routeDisplayColors'
+import type { ScheduleRoute } from '@/features/routes/api/routes'
 
 type RouteDirectoryProps = {
-  routes: TtcSurfaceRoute[]
+  routes: ScheduleRoute[]
   selectedRouteId: string | null
   query: string
+  isLoading: boolean
+  isError: boolean
   onQueryChange: (query: string) => void
   onSelect: (routeId: string) => void
 }
 
-export function RouteDirectory({ routes, selectedRouteId, query, onQueryChange, onSelect }: RouteDirectoryProps) {
+export function RouteDirectory({ routes, selectedRouteId, query, isLoading, isError, onQueryChange, onSelect }: RouteDirectoryProps) {
   return (
     <aside className="route-directory" aria-label="Route directory">
       <header className="route-directory-header">
@@ -26,7 +28,7 @@ export function RouteDirectory({ routes, selectedRouteId, query, onQueryChange, 
         </label>
       </header>
       <div className="route-directory-list">
-        {routes.map((route) => {
+        {!isLoading && !isError && routes.map((route) => {
           const selected = route.routeId === selectedRouteId
           const accent = getRouteDisplayColor(route.routeId)
           return (
@@ -38,12 +40,14 @@ export function RouteDirectory({ routes, selectedRouteId, query, onQueryChange, 
               type="button"
               onClick={() => onSelect(route.routeId)}
             >
-              <strong>{route.routeShortName}</strong>
-              <span>{route.routeLongName}</span>
+              <strong>{route.shortName ?? route.routeId}</strong>
+              <span>{route.longName ?? 'Unnamed route'}</span>
             </button>
           )
         })}
-        {routes.length === 0 && <p className="route-directory-empty">No matching routes.</p>}
+        {isLoading && <p className="route-directory-empty">Loading schedule routes.</p>}
+        {isError && <p className="route-directory-empty">Route data is unavailable.</p>}
+        {!isLoading && !isError && routes.length === 0 && <p className="route-directory-empty">No matching routes.</p>}
       </div>
     </aside>
   )

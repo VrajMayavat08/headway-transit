@@ -84,6 +84,7 @@ main { min-width: 0; min-height: 0; padding: var(--space-6); display: flex; }
 .route-directory-item span { overflow: hidden; font-size: 11px; line-height: 1.3; text-overflow: ellipsis; white-space: nowrap; }
 .route-directory-empty { padding: 12px 8px; color: var(--color-text-muted); font-size: 11px; }
 .route-details { display: flex; flex-direction: column; background: var(--color-bg); }
+.route-details-empty, .route-details-unavailable { padding: 28px; color: var(--color-text-muted); font: 12px/1.5 'SFMono-Regular', Consolas, monospace; }
 .route-details-header { flex: 0 0 auto; padding: 26px 28px 20px; border-bottom: 1px solid var(--color-border); border-left: 2px solid var(--route-accent); }
 .route-details-header h1 { margin: 10px 0 0; color: var(--color-text); font: 44px/1 'SFMono-Regular', Consolas, monospace; font-weight: 500; }
 .route-details-header h2 { margin: 8px 0 0; color: var(--color-text); font: 15px/1.4 'SFMono-Regular', Consolas, monospace; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
@@ -93,12 +94,19 @@ main { min-width: 0; min-height: 0; padding: var(--space-6); display: flex; }
 .route-details-metadata dd { overflow: hidden; margin: 5px 0 0; color: var(--color-text); font-size: 12px; line-height: 1.35; text-overflow: ellipsis; white-space: nowrap; }
 .route-stop-list { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 18px 28px 0; }
 .route-stop-list h3 { flex: 0 0 auto; margin: 0 0 11px; font-weight: 400; }
-.route-stop-list ol { flex: 1; min-height: 0; margin: 0 -14px 0 0; padding: 0 14px 20px 0; overflow-y: auto; list-style: none; }
+.route-stop-patterns { flex: 1; min-height: 0; margin-right: -14px; padding-right: 14px; overflow-y: auto; }
+.route-stop-pattern { margin-bottom: 18px; }
+.route-stop-pattern > p { display: grid; gap: 4px; margin: 0 0 8px; color: var(--color-text-muted); font: 10px/1.35 'SFMono-Regular', Consolas, monospace; letter-spacing: .04em; }
+.route-stop-pattern > p strong { color: var(--color-text); font-weight: 500; letter-spacing: .1em; }
+.route-stop-pattern > p small { color: var(--color-text-muted); font-size: 9px; }
+.route-stop-pattern ol { margin: 0; padding: 0; list-style: none; }
 .route-stop-list li { position: relative; display: flex; align-items: flex-start; gap: 10px; min-height: 27px; color: var(--color-text-muted); font-size: 12px; line-height: 1.4; }
 .route-stop-list li > span:first-child { position: relative; z-index: 1; width: 7px; height: 7px; flex: 0 0 auto; margin-top: 5px; border: 1px solid var(--route-accent); border-radius: 50%; background: var(--color-bg); }
 .route-stop-list li:not(:last-child)::before { position: absolute; top: 12px; bottom: -2px; left: 3px; width: 1px; content: ''; background: var(--color-border); }
 .route-map-panel { position: relative; min-width: 0; min-height: 0; background: var(--color-bg); }
 .route-map { position: absolute; inset: 0; background: var(--color-bg); }
+.route-map-canvas { position: absolute; inset: 0; }
+.route-map-status { position: absolute; bottom: 16px; left: 16px; margin: 0; padding: 8px 10px; color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: var(--radius-small); background: var(--color-surface); font: 10px 'SFMono-Regular', Consolas, monospace; pointer-events: none; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .stops-page { flex: 1; min-height: 0; margin: calc(-1 * var(--space-6)); display: grid; grid-template-columns: 264px minmax(310px, 1fr) minmax(300px, 34%); overflow: hidden; background: var(--color-bg); }
 .stop-directory, .stop-details { min-width: 0; min-height: 0; border-right: 1px solid var(--color-border); }

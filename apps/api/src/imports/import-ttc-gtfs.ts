@@ -6,14 +6,14 @@ import AdmZip from 'adm-zip'
 import type { PoolClient } from 'pg'
 import { createDatabasePool } from '../db/pool.js'
 import { deleteFeedSnapshot } from './replaceSnapshot.js'
+import { resolveTtcGtfsImportConfiguration } from './ttcGtfsImportConfig.js'
 
 type CsvRow = Record<string, string>
 type OpenCsv = { name: string; rows: Iterable<{ rowNumber: number; values: CsvRow }> }
 
 const scriptDirectory = dirname(fileURLToPath(import.meta.url))
 const repositoryRoot = resolve(scriptDirectory, '../../../../')
-const archivePath = resolve(repositoryRoot, 'data/imports/ttc-static-gtfs.zip')
-const sourceKey = 'ttc-static'
+const importConfiguration = resolveTtcGtfsImportConfiguration(process.argv.slice(2), repositoryRoot)
 const batchSize = 500
 
 function optional(value: string | undefined) { return value === '' || value === undefined ? null : value }
@@ -119,7 +119,7 @@ if (!pool) throw new Error('DATABASE_URL is required to import GTFS')
 const startedAt = Date.now()
 
 try {
-  const archive = await readFile(archivePath)
+  const archive = await readFile(importConfiguration.archivePath)
   const checksum = createHash('sha256').update(archive).digest('hex')
   const zip = new AdmZip(archive)
   const agenciesCsv = openCsv(zip, 'agency.txt', ['agency_name', 'agency_url', 'agency_timezone'])
@@ -142,8 +142,8 @@ try {
 
   try {
     await client.query('BEGIN')
-    await deleteFeedSnapshot(client, sourceKey)
-    await client.query('INSERT INTO feed_imports (feed_import_id, source_key, source_filename, source_checksum) VALUES ($1, $2, $3, $4)', [feedImportId, sourceKey, 'ttc-static-gtfs.zip', checksum])
+    await deleteFeedSnapshot(client, importConfiguration.sourceKey)
+    await client.query('INSERT INTO feed_imports (feed_import_id, source_key, source_filename, source_checksum) VALUES ($1, $2, $3, $4)', [feedImportId, importConfiguration.sourceKey, importConfiguration.archiveFilename, checksum])
 
     await importFile(client, agenciesCsv, 'agencies', ['feed_import_id', 'agency_id', 'agency_name', 'agency_url', 'agency_timezone', 'agency_lang', 'agency_phone', 'agency_fare_url', 'agency_email'], (row, file, rowNumber) => {
       const agencyId = row.agency_id || '__default__'
@@ -205,7 +205,7 @@ try {
 
     await client.query('UPDATE feed_imports SET completed_at = now(), row_counts = $2::jsonb WHERE feed_import_id = $1', [feedImportId, JSON.stringify(counts)])
     await client.query('COMMIT')
-    console.log(`Imported TTC static GTFS in ${((Date.now() - startedAt) / 1000).toFixed(1)}s`)
+    console.log(`Imported ${importConfiguration.sourceKey} GTFS in ${((Date.now() - startedAt) / 1000).toFixed(1)}s`)
     console.log(Object.entries(counts).map(([table, count]) => `${table}: ${count}`).join('\n'))
   } catch (error) {
     await client.query('ROLLBACK')
