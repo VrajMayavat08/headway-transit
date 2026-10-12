@@ -23,3 +23,13 @@ export const ttcSurfaceRoutes = ttcSurfaceRouteCollection.features
 export function getTtcSurfaceRoute(routeId: string | null) {
   return routeId ? ttcSurfaceRoutes.find((route) => route.routeId === routeId) ?? null : null
 }
+
+export function getTtcSurfaceRouteGeometry(routeId: string | null) {
+  if (!routeId) return null
+
+  const feature = ttcSurfaceRouteCollection.features.find(
+    (candidate) => candidate.geometry.type === 'LineString' && candidate.properties.routeId === routeId,
+  )
+
+  return feature?.geometry.type === 'LineString' ? feature.geometry.coordinates as number[][] : null
+}

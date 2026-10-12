@@ -14,7 +14,14 @@ const indexRoute = createRoute({
   beforeLoad: () => { throw redirect({ to: '/network', replace: true }) },
 })
 const networkRoute = createRoute({ getParentRoute: () => rootRoute, path: '/network', component: NetworkPage })
-const routesRoute = createRoute({ getParentRoute: () => rootRoute, path: '/routes', component: RoutesPage })
+const routesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/routes',
+  validateSearch: (search: Record<string, unknown>) => ({
+    routeId: typeof search.routeId === 'string' ? search.routeId : undefined,
+  }),
+  component: RoutesPage,
+})
 const stopsRoute = createRoute({ getParentRoute: () => rootRoute, path: '/stops', component: StopsPage })
 const reliabilityRoute = createRoute({ getParentRoute: () => rootRoute, path: '/reliability', component: ReliabilityPage })
 const playbackRoute = createRoute({ getParentRoute: () => rootRoute, path: '/playback', component: PlaybackPage })
