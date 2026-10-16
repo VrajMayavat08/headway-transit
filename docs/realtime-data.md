@@ -26,6 +26,12 @@ The command stores the official source archive at the gitignored `data/imports/t
 
 `apps/api/src/realtime/ttcVehiclePositions.ts` fetches and decodes one vehicle-position snapshot. The opt-in collector persists decoded observations transactionally and matches identifiers only against the separate `ttc-surface` snapshot. It preserves reported identifiers when no SurfaceGTFS match exists. `GET /api/realtime/vehicles` reads the latest stored snapshot; it never fetches TTC on request. See [the local integration procedure](local-integration.md) for the enablement steps.
 
+## Service-alert boundary
+
+`GET /api/alerts` reads the official TTC BusTime GTFS-Realtime alerts feed on demand with a 10-second request timeout and caches a successful decoded response in API memory for 30 seconds. An optional `routeId` query filters the normalized response by GTFS-Realtime `informed_entity.route_id`. Upstream failures return HTTP 503 and are never converted into an empty or all-clear result.
+
+The response reports `available` when the complete feed contains alert entities and `empty` only when a successful complete feed contains none. It includes the feed timestamp, fetch timestamp, total unfiltered alert count, source attribution, and normalized alert entities. Alert entities preserve source header and description text, affected route and stop IDs, cause, effect, source-provided severity, active periods, and URL. Missing optional fields remain `null` or empty. The current TTC feed may omit active periods and severity; Headway does not infer either field.
+
 ## References
 
 - [TTC BusTime Real-Time Next Vehicle Arrival](https://open.toronto.ca/dataset/ttc-bustime-real-time-next-vehicle-arrival-nvas/)

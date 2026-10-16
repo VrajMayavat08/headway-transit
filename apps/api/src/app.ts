@@ -9,12 +9,15 @@ import { registerRoutesEndpoint } from './schedules/routesEndpoint.js'
 import { registerRealtimeVehiclesEndpoint } from './realtime/vehiclesEndpoint.js'
 import { registerHeadwaysEndpoint } from './reliability/headwaysEndpoint.js'
 import { registerPlaybackVehiclesEndpoint } from './playback/vehiclesEndpoint.js'
+import { registerAlertsEndpoint } from './alerts/alertsEndpoint.js'
+import type { TtcServiceAlertsService } from './alerts/ttcServiceAlerts.js'
 
 interface AppOptions {
   database?: Pool | null
+  alertsService?: TtcServiceAlertsService
 }
 
-export function buildApp({ database = createDatabasePool() }: AppOptions = {}) {
+export function buildApp({ database = createDatabasePool(), alertsService }: AppOptions = {}) {
   const app = Fastify({ logger: true })
 
   app.register(cors, { origin: ['http://localhost:5173', 'http://127.0.0.1:5173'] })
@@ -36,6 +39,7 @@ export function buildApp({ database = createDatabasePool() }: AppOptions = {}) {
   registerRealtimeVehiclesEndpoint(app, database)
   registerHeadwaysEndpoint(app, database)
   registerPlaybackVehiclesEndpoint(app, database)
+  registerAlertsEndpoint(app, alertsService)
 
   app.addHook('onClose', async () => { await database?.end() })
 

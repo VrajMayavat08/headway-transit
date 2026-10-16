@@ -1,20 +1,28 @@
-export type AlertLifecycleStatus = 'active' | 'upcoming' | 'historical'
-export type NormalizedAlertSeverity = 'critical' | 'major' | 'minor' | 'unknown'
+export type SourceAlertSeverity = 'info' | 'warning' | 'severe'
 
 export interface AlertActivePeriod { start: string | null; end: string | null }
 
 export interface ServiceAlert {
   alertId: string
-  agencyId: string
-  source: string
-  headerText: string
-  descriptionText: string | null
+  title: string | null
+  description: string | null
   affectedRouteIds: string[]
   affectedStopIds: string[]
+  cause: string | null
+  effect: string | null
+  severity: SourceAlertSeverity | null
   activePeriods: AlertActivePeriod[]
-  gtfsRealtimeEffect: string | null
-  gtfsRealtimeCause: string | null
-  normalizedSeverity: NormalizedAlertSeverity
-  lifecycleStatus: AlertLifecycleStatus
+  url: string | null
+  source: string
   lastUpdatedAt: string | null
+}
+
+export interface AlertsResponse {
+  status: 'available' | 'empty'
+  source: { name: string; url: string; attribution: string }
+  fetchedAt: string
+  feedTimestamp: string | null
+  routeId: string | null
+  totalAlertCount: number
+  alerts: ServiceAlert[]
 }
