@@ -1,4 +1,5 @@
 import { useObservedHeadways } from '@/features/reliability/api/headways'
+import { formatLocalDateTime, formatLocalTime } from '@/lib/formatting/time'
 
 export function HeadwayAnalysis({ routeId }: { routeId: string }) {
   const query = useObservedHeadways(routeId)
@@ -9,9 +10,9 @@ export function HeadwayAnalysis({ routeId }: { routeId: string }) {
     {query.isPending && <p role="status">Checking stored observations…</p>}
     {query.isError && <p role="alert">Analysis unavailable. {data ? 'The previous result may be stale.' : 'Unable to read stored observations.'}</p>}
     {data && <>
-      <p>{new Date(data.window.start).toLocaleTimeString()} – {new Date(data.window.end).toLocaleTimeString()} · {data.coverage.snapshotCount} snapshots · {data.coverage.sampleCount.toLocaleString()} samples</p>
-      {data.coverage.firstCollectedAt && <p>Collection coverage begins {new Date(data.coverage.firstCollectedAt).toLocaleTimeString()} · {data.coverage.gapCount} gaps over 120 seconds.</p>}
-      <p>Last collected: {data.coverage.lastCollectedAt ? new Date(data.coverage.lastCollectedAt).toLocaleString() : 'No observations'}.</p>
+      <p>{formatLocalTime(data.window.start)} – {formatLocalTime(data.window.end)} · {data.coverage.snapshotCount} snapshots · {data.coverage.sampleCount.toLocaleString()} samples</p>
+      {data.coverage.firstCollectedAt && <p>Collection coverage begins {formatLocalTime(data.coverage.firstCollectedAt)} · {data.coverage.gapCount} gaps over 120 seconds.</p>}
+      <p>Last collected (local): {data.coverage.lastCollectedAt ? formatLocalDateTime(data.coverage.lastCollectedAt) : 'No observations'}.</p>
       {data.status === 'insufficient_data' && <p role="status"><strong>Insufficient data.</strong> At least two unambiguous headway intervals at the same point, direction, and shape are required.</p>}
       {data.coverage.capped && <p>The bounded analysis limit was reached; no partial metrics are shown.</p>}
       {data.results.length > 0 && <div className="reliability-table-wrap"><table>

@@ -32,7 +32,7 @@ export function PlaybackPage() {
     <PlaybackMap routeId={routeId} vehicles={data?.status === 'available' ? data.observations : emptyVehicles} />
     <header className="playback-header">
       <div><span>PLAYBACK</span><strong>HISTORICAL NETWORK</strong></div>
-      <label><span>REQUESTED TIME</span><input type="datetime-local" step="1" value={localDateTime(requestedAt)} onChange={(event) => {
+      <label><span>REQUESTED TIME (LOCAL)</span><input type="datetime-local" step="1" value={localDateTime(requestedAt)} onChange={(event) => {
         const value = new Date(event.target.value)
         if (Number.isFinite(value.getTime())) setRequestedAt(value.toISOString())
       }} /></label>

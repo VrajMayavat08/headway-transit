@@ -3,6 +3,7 @@ import Fastify from 'fastify'
 import type { Pool } from 'pg'
 import { checkDatabaseHealth } from './db/health.js'
 import { createDatabasePool } from './db/pool.js'
+import { getCorsOrigins } from './config.js'
 import { registerRouteGeometryEndpoint } from './schedules/routeGeometryEndpoint.js'
 import { registerRouteStopsEndpoint } from './schedules/routeStopsEndpoint.js'
 import { registerRoutesEndpoint } from './schedules/routesEndpoint.js'
@@ -20,7 +21,7 @@ interface AppOptions {
 export function buildApp({ database = createDatabasePool(), alertsService }: AppOptions = {}) {
   const app = Fastify({ logger: true })
 
-  app.register(cors, { origin: ['http://localhost:5173', 'http://127.0.0.1:5173'] })
+  app.register(cors, { origin: getCorsOrigins() })
 
   app.get('/health', async () => ({
     status: 'ok',

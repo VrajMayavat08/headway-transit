@@ -4,7 +4,7 @@ import { fetchScheduleRouteGeometry, scheduleRouteGeometryQueryKey } from './rou
 export function useRouteGeometry(routeId: string | null) {
   return useQuery({
     queryKey: scheduleRouteGeometryQueryKey(routeId),
-    queryFn: () => fetchScheduleRouteGeometry(routeId as string),
+    queryFn: ({ signal }) => fetchScheduleRouteGeometry(routeId as string, signal),
     enabled: routeId !== null,
   })
 }

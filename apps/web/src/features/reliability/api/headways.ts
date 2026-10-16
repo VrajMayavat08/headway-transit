@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { apiUrl } from '@/lib/api/url'
 
 export type HeadwayResult = {
   routeId: string
@@ -24,7 +25,7 @@ export function useObservedHeadways(routeId: string) {
     queryKey: ['reliability', 'headway-bounds', routeId],
     queryFn: async ({ signal }): Promise<ObservedHeadways> => {
       const suffix = routeId === 'all' ? '' : `?routeId=${encodeURIComponent(routeId)}`
-      const response = await fetch(`/api/reliability/headways${suffix}`, { signal })
+      const response = await fetch(apiUrl(`/api/reliability/headways${suffix}`), { signal })
       if (!response.ok) throw new Error('Observed headway analysis is unavailable.')
       const data = await response.json() as ObservedHeadways
       if (!data || !['available', 'insufficient_data'].includes(data.status) || !data.window || !data.coverage || !Array.isArray(data.results)) {

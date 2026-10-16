@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { apiUrl } from '@/lib/api/url'
 
 export type HistoricalVehicle = {
   entityId: string
@@ -29,7 +30,7 @@ export function usePlaybackVehicles(timestamp: string, routeId: string) {
     queryFn: async ({ signal }): Promise<PlaybackResponse> => {
       const query = new URLSearchParams({ timestamp })
       if (routeId !== 'all') query.set('routeId', routeId)
-      const response = await fetch(`/api/playback/vehicles?${query}`, { signal })
+      const response = await fetch(apiUrl(`/api/playback/vehicles?${query}`), { signal })
       if (!response.ok) throw new Error('Historical observations are unavailable.')
       const data = await response.json() as PlaybackResponse
       if (!data || !['available', 'no_data', 'outside_retention'].includes(data.status) || !Array.isArray(data.timeline)

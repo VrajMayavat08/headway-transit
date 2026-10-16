@@ -37,11 +37,10 @@ export function matchSurfaceIdentifiers(vehicles: TtcVehiclePosition[], surface:
 }
 
 async function findSurfaceIdentifiers(client: PoolClient, vehicles: TtcVehiclePosition[]): Promise<SurfaceIdentifiers> {
-  const [routes, trips, stops] = await Promise.all([
-    client.query<{ routeId: string }>('SELECT route_id AS "routeId" FROM routes WHERE feed_import_id = (SELECT feed_import_id FROM feed_imports WHERE source_key = $1) AND route_id = ANY($2::text[])', [TTC_SURFACE_SOURCE_KEY, identifiers(vehicles.map((vehicle) => vehicle.routeId))]),
-    client.query<{ tripId: string }>('SELECT trip_id AS "tripId" FROM trips WHERE feed_import_id = (SELECT feed_import_id FROM feed_imports WHERE source_key = $1) AND trip_id = ANY($2::text[])', [TTC_SURFACE_SOURCE_KEY, identifiers(vehicles.map((vehicle) => vehicle.tripId))]),
-    client.query<{ stopId: string }>('SELECT stop_id AS "stopId" FROM stops WHERE feed_import_id = (SELECT feed_import_id FROM feed_imports WHERE source_key = $1) AND stop_id = ANY($2::text[])', [TTC_SURFACE_SOURCE_KEY, identifiers(vehicles.map((vehicle) => vehicle.stopId))]),
-  ])
+  // pg clients execute one transaction at a time; concurrent client.query calls trigger a deprecation warning.
+  const routes = await client.query<{ routeId: string }>('SELECT route_id AS "routeId" FROM routes WHERE feed_import_id = (SELECT feed_import_id FROM feed_imports WHERE source_key = $1) AND route_id = ANY($2::text[])', [TTC_SURFACE_SOURCE_KEY, identifiers(vehicles.map((vehicle) => vehicle.routeId))])
+  const trips = await client.query<{ tripId: string }>('SELECT trip_id AS "tripId" FROM trips WHERE feed_import_id = (SELECT feed_import_id FROM feed_imports WHERE source_key = $1) AND trip_id = ANY($2::text[])', [TTC_SURFACE_SOURCE_KEY, identifiers(vehicles.map((vehicle) => vehicle.tripId))])
+  const stops = await client.query<{ stopId: string }>('SELECT stop_id AS "stopId" FROM stops WHERE feed_import_id = (SELECT feed_import_id FROM feed_imports WHERE source_key = $1) AND stop_id = ANY($2::text[])', [TTC_SURFACE_SOURCE_KEY, identifiers(vehicles.map((vehicle) => vehicle.stopId))])
 
   return {
     routeIds: new Set(routes.rows.map((row) => row.routeId)),

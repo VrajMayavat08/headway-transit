@@ -15,7 +15,7 @@ export function RoutesPage() {
   const [query, setQuery] = useState('')
   const { data: routes = [], isPending, isError } = useQuery({
     queryKey: scheduleRoutesQueryKey,
-    queryFn: fetchScheduleRoutes,
+    queryFn: ({ signal }) => fetchScheduleRoutes(signal),
   })
 
   useEffect(() => {

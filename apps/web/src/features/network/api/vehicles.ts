@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import { apiUrl } from '@/lib/api/url'
 
 export type VehicleObservation = {
   entityId: string
@@ -25,7 +26,7 @@ function timestamp(value: unknown): number | null {
 }
 
 export async function fetchVehicles(signal?: AbortSignal): Promise<VehicleResponse> {
-  const response = await fetch('/api/realtime/vehicles', { signal })
+  const response = await fetch(apiUrl('/api/realtime/vehicles'), { signal })
   if (!response.ok) throw new Error('Vehicle observations are unavailable.')
   const data = await response.json() as Record<string, unknown>
   if (!data || !['current', 'stale', 'empty'].includes(data.status as string) || !Array.isArray(data.observations)) {

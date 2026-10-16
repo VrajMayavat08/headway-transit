@@ -1,13 +1,14 @@
 import type { PlaybackResponse } from '@/features/playback/api/vehicles'
+import { formatLocalDate, formatLocalDateTime } from '@/lib/formatting/time'
 
 export function PlaybackSessionPanel({ data, requestedAt, status }: { data: PlaybackResponse | undefined; requestedAt: string; status: string }) {
   return <aside className="playback-session-panel" aria-label="Historical snapshot details">
-    <header><span>COLLECTED SNAPSHOT</span><strong>{new Date(requestedAt).toLocaleDateString()}</strong></header>
+    <header><span>COLLECTED SNAPSHOT</span><strong>{formatLocalDate(requestedAt)}</strong></header>
     <dl>
       <div><dt>STATUS</dt><dd>{status}</dd></div>
-      <div><dt>REQUESTED TIME</dt><dd>{new Date(requestedAt).toLocaleString()}</dd></div>
-      <div><dt>ACTUAL COLLECTION</dt><dd>{data?.snapshot ? new Date(data.snapshot.fetchedAt).toLocaleString() : 'Not available'}</dd></div>
-      <div><dt>FEED TIMESTAMP</dt><dd>{data?.snapshot?.feedTimestamp ? new Date(data.snapshot.feedTimestamp * 1000).toLocaleString() : 'Not available'}</dd></div>
+      <div><dt>REQUESTED TIME (LOCAL)</dt><dd>{formatLocalDateTime(requestedAt)}</dd></div>
+      <div><dt>ACTUAL COLLECTION (LOCAL)</dt><dd>{data?.snapshot ? formatLocalDateTime(data.snapshot.fetchedAt) : 'Not available'}</dd></div>
+      <div><dt>FEED TIMESTAMP (LOCAL)</dt><dd>{data?.snapshot?.feedTimestamp ? formatLocalDateTime(data.snapshot.feedTimestamp) : 'Not available'}</dd></div>
       <div><dt>DISPLAYED POSITIONS</dt><dd>{data?.status === 'available' ? data.observations.length.toLocaleString() : 'Not available'}</dd></div>
     </dl>
     <p>Discrete collected positions. Movement between snapshots was not continuously observed. Per-vehicle source times may precede collection.</p>

@@ -1,4 +1,5 @@
 import type { AlertsResponse, ServiceAlert } from '@/features/alerts/types'
+import { formatLocalDateTime } from '@/lib/formatting/time'
 
 type AlertTimelineProps = {
   alerts: ServiceAlert[]
@@ -10,11 +11,6 @@ type AlertTimelineProps = {
 
 function readable(value: string | null) {
   return value?.replaceAll('_', ' ') ?? 'Details not classified'
-}
-
-function formatTime(value: string | null) {
-  if (!value) return 'Timestamp not supplied'
-  return new Intl.DateTimeFormat('en-CA', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(value))
 }
 
 export function AlertTimeline({ alerts, selectedAlertId, state, response, onSelect }: AlertTimelineProps) {
@@ -41,10 +37,10 @@ export function AlertTimeline({ alerts, selectedAlertId, state, response, onSele
             <strong>{alert.title ?? alert.description ?? 'TITLE NOT PROVIDED'}</strong>
             <small>{readable(alert.effect)} · {alert.affectedRouteIds.length ? `Routes ${alert.affectedRouteIds.join(', ')}` : 'System-wide / route not supplied'}</small>
           </span>
-          <time dateTime={alert.lastUpdatedAt ?? undefined}>{formatTime(alert.lastUpdatedAt)}</time>
+          <time dateTime={alert.lastUpdatedAt ?? undefined}>{formatLocalDateTime(alert.lastUpdatedAt, 'Timestamp not supplied')}</time>
         </button>)}
       </div>
     )}
-    {response && <footer className="alert-source-note"><span>{response.source.name}</span><span>Feed update {formatTime(response.feedTimestamp)}</span></footer>}
+    {response && <footer className="alert-source-note"><span>{response.source.name}</span><span>Feed update (local) {formatLocalDateTime(response.feedTimestamp, 'not supplied')}</span></footer>}
   </section>
 }

@@ -26,17 +26,26 @@ test('keeps reported identifiers while matching only against SurfaceGTFS identif
 test('persists a new snapshot transactionally and does not insert an already-seen feed timestamp', async () => {
   const queries: Array<{ text: string; values?: unknown[] }> = []
   let insertSnapshotCalls = 0
+  let activeQueries = 0
+  let maximumConcurrentQueries = 0
   const client = {
     query: async (text: string, values?: unknown[]) => {
+      activeQueries += 1
+      maximumConcurrentQueries = Math.max(maximumConcurrentQueries, activeQueries)
       queries.push({ text, values })
-      if (text.includes('INSERT INTO vehicle_position_snapshots')) {
-        insertSnapshotCalls += 1
-        return { rows: insertSnapshotCalls === 1 ? [{ snapshotId: 'snapshot-1' }] : [] }
+      try {
+        await Promise.resolve()
+        if (text.includes('INSERT INTO vehicle_position_snapshots')) {
+          insertSnapshotCalls += 1
+          return { rows: insertSnapshotCalls === 1 ? [{ snapshotId: 'snapshot-1' }] : [] }
+        }
+        if (text.includes('FROM routes')) return { rows: [{ routeId: '29' }] }
+        if (text.includes('FROM trips')) return { rows: [{ tripId: 'trip-29' }] }
+        if (text.includes('FROM stops')) return { rows: [] }
+        return { rows: [] }
+      } finally {
+        activeQueries -= 1
       }
-      if (text.includes('FROM routes')) return { rows: [{ routeId: '29' }] }
-      if (text.includes('FROM trips')) return { rows: [{ tripId: 'trip-29' }] }
-      if (text.includes('FROM stops')) return { rows: [] }
-      return { rows: [] }
     },
   } as unknown as PoolClient
 
@@ -52,4 +61,5 @@ test('persists a new snapshot transactionally and does not insert an already-see
   assert.ok(observationInsert.values?.includes('trip-29'))
   assert.equal(observationInsert.values?.filter((value) => value === 'stop-29').length, 1)
   assert.ok(queries.some(({ text, values }) => text.startsWith('DELETE FROM vehicle_position_snapshots') && values?.[0] === 'ttc-vehicle-positions'))
+  assert.equal(maximumConcurrentQueries, 1)
 })

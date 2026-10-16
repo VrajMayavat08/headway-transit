@@ -1,3 +1,5 @@
+import { apiUrl } from '@/lib/api/url'
+
 export type ScheduleRoute = {
   routeId: string
   shortName: string | null
@@ -60,8 +62,8 @@ function isScheduleRoute(value: unknown): value is ScheduleRoute {
     && (typeof route.color === 'string' || route.color === null)
 }
 
-export async function fetchScheduleRoutes(): Promise<ScheduleRoute[]> {
-  const response = await fetch('/api/routes')
+export async function fetchScheduleRoutes(signal?: AbortSignal): Promise<ScheduleRoute[]> {
+  const response = await fetch(apiUrl('/api/routes'), { signal })
   if (!response.ok) throw new Error('TTC schedule routes are unavailable.')
 
   const data: unknown = await response.json()
@@ -99,8 +101,8 @@ export function scheduleRouteStopsQueryKey(routeId: string | null) {
   return ['schedule-route-stops', routeId] as const
 }
 
-export async function fetchScheduleRouteStops(routeId: string): Promise<ScheduleRouteStops> {
-  const response = await fetch(`/api/routes/${encodeURIComponent(routeId)}/stops`)
+export async function fetchScheduleRouteStops(routeId: string, signal?: AbortSignal): Promise<ScheduleRouteStops> {
+  const response = await fetch(apiUrl(`/api/routes/${encodeURIComponent(routeId)}/stops`), { signal })
   if (!response.ok) throw new Error('TTC route stops are unavailable.')
 
   const data: unknown = await response.json()
@@ -140,8 +142,8 @@ export function scheduleRouteGeometryQueryKey(routeId: string | null) {
   return ['schedule-route-geometry', routeId] as const
 }
 
-export async function fetchScheduleRouteGeometry(routeId: string): Promise<ScheduleRouteGeometry> {
-  const response = await fetch(`/api/routes/${encodeURIComponent(routeId)}/geometry`)
+export async function fetchScheduleRouteGeometry(routeId: string, signal?: AbortSignal): Promise<ScheduleRouteGeometry> {
+  const response = await fetch(apiUrl(`/api/routes/${encodeURIComponent(routeId)}/geometry`), { signal })
   if (!response.ok) throw new Error('TTC route geometry is unavailable.')
 
   const data: unknown = await response.json()

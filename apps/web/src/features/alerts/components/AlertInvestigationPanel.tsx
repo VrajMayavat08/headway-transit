@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import type { AlertsResponse, ServiceAlert } from '@/features/alerts/types'
+import { formatLocalDateTime } from '@/lib/formatting/time'
 
 function readable(value: string | null) {
   return value?.replaceAll('_', ' ') ?? 'Not supplied by source'
@@ -7,7 +8,7 @@ function readable(value: string | null) {
 
 function period(alert: ServiceAlert) {
   if (!alert.activePeriods.length) return 'Not supplied by source'
-  return alert.activePeriods.map(({ start, end }) => `${start ?? 'Open start'} — ${end ?? 'Open end'}`).join('; ')
+  return alert.activePeriods.map(({ start, end }) => `${formatLocalDateTime(start, 'Open start')} — ${formatLocalDateTime(end, 'Open end')}`).join('; ')
 }
 
 export function AlertInvestigationPanel({ alert, response }: { alert: ServiceAlert | null; response: AlertsResponse | undefined }) {

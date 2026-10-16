@@ -4,7 +4,7 @@ import { fetchScheduleRouteStops, scheduleRouteStopsQueryKey } from './routes'
 export function useRouteStops(routeId: string | null) {
   return useQuery({
     queryKey: scheduleRouteStopsQueryKey(routeId),
-    queryFn: () => fetchScheduleRouteStops(routeId as string),
+    queryFn: ({ signal }) => fetchScheduleRouteStops(routeId as string, signal),
     enabled: routeId !== null,
   })
 }

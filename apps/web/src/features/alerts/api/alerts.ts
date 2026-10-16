@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 import type { AlertsResponse, ServiceAlert } from '@/features/alerts/types'
+import { apiUrl } from '@/lib/api/url'
 
 function nullableText(value: unknown) {
   return typeof value === 'string' && value.length > 0 ? value : null
@@ -22,7 +23,7 @@ function isAlert(value: unknown): value is ServiceAlert {
 
 export async function fetchServiceAlerts(routeId: string, signal?: AbortSignal): Promise<AlertsResponse> {
   const search = routeId === 'all' ? '' : `?routeId=${encodeURIComponent(routeId)}`
-  const response = await fetch(`/api/alerts${search}`, { signal })
+  const response = await fetch(apiUrl(`/api/alerts${search}`), { signal })
   if (!response.ok) throw new Error('The TTC service-alert feed is temporarily unavailable.')
   const data = await response.json() as Partial<AlertsResponse>
   if (!data || !['available', 'empty'].includes(data.status ?? '') || !data.source

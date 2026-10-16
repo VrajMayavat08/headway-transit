@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import type { ExpressionSpecification, GeoJSONSource, Map, MapLayerMouseEvent } from 'maplibre-gl'
 import { useVehicles, type VehicleObservation } from '@/features/network/api/vehicles'
 import { getRouteDisplayColor } from '@/features/network/data/routeDisplayColors'
+import { formatLocalDateTime } from '@/lib/formatting/time'
 import styles from './NetworkVehicles.module.css'
 
 const sourceId = 'headway-live-vehicles'
@@ -30,12 +31,6 @@ function updateVehicles(map: Map, observations: VehicleObservation[], visible: b
   map.setPaintProperty(circleLayer, 'circle-opacity', routeId
     ? ['case', ['==', ['get', 'routeId'], routeId], 1, 0.2] : 0.9)
   map.setPaintProperty(circleLayer, 'circle-stroke-color', ['case', selectedVehicle, '#f1eee5', '#0b1212'])
-}
-
-function formatTime(value: string | number | null | undefined) {
-  if (value === null || value === undefined) return 'Unavailable'
-  const date = new Date(typeof value === 'number' ? value * 1000 : value)
-  return Number.isFinite(date.getTime()) ? date.toLocaleString() : 'Unavailable'
 }
 
 export function NetworkVehicles({ map, selectedRouteId }: { map: Map | null; selectedRouteId: string | null }) {
@@ -93,15 +88,15 @@ export function NetworkVehicles({ map, selectedRouteId }: { map: Map | null; sel
     <div className={styles.status}>
       <label><input type="checkbox" checked={visible} onChange={(event) => setVisible(event.target.checked)} />Live vehicles</label>
       <span role="status">{status}</span>
-      <span>Last collected: {formatTime(query.data?.snapshot?.fetchedAt)}</span>
-      {query.data?.snapshot && <span>Feed updated: {formatTime(query.data.snapshot.feedTimestamp)}</span>}
+      <span>Last collected (local): {formatLocalDateTime(query.data?.snapshot?.fetchedAt)}</span>
+      {query.data?.snapshot && <span>Feed updated (local): {formatLocalDateTime(query.data.snapshot.feedTimestamp)}</span>}
       {query.data && <span>{observations.length.toLocaleString()} valid positions</span>}
     </div>
     {visible && selected && <aside className={styles.details} aria-label="Selected vehicle">
       <button type="button" onClick={() => setSelectedId(null)} aria-label="Close vehicle details">×</button>
       <strong>VEHICLE {selected.vehicleId ?? 'ID unavailable'}</strong>
       <span>Reported route: {selected.reportedRouteId ?? 'Unavailable'}</span>
-      <span>Observed: {formatTime(selected.sourceTimestamp)}</span>
+      <span>Observed (local): {formatLocalDateTime(selected.sourceTimestamp)}</span>
       {selected.matchedSurfaceTripId && <span>Confirmed SurfaceGTFS trip: {selected.matchedSurfaceTripId}</span>}
     </aside>}
   </div>
