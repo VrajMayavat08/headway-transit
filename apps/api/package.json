@@ -7,7 +7,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "test": "tsx --test src/imports/replaceSnapshot.test.ts src/imports/ttcGtfsImportConfig.test.ts src/schedules/routesEndpoint.test.ts src/schedules/routeStopsEndpoint.test.ts src/schedules/routeGeometryEndpoint.test.ts src/realtime/ttcVehiclePositions.test.ts src/realtime/ttcIdentifierCompatibility.test.ts src/realtime/vehicleObservations.test.ts src/realtime/ttcVehicleCollector.test.ts src/realtime/vehiclesEndpoint.test.ts",
+    "test": "tsx --test src/imports/replaceSnapshot.test.ts src/imports/ttcGtfsImportConfig.test.ts src/schedules/routesEndpoint.test.ts src/schedules/routeStopsEndpoint.test.ts src/schedules/routeGeometryEndpoint.test.ts src/realtime/ttcVehiclePositions.test.ts src/realtime/ttcIdentifierCompatibility.test.ts src/realtime/vehicleObservations.test.ts src/realtime/ttcVehicleCollector.test.ts src/realtime/vehiclesEndpoint.test.ts src/reliability/passages.test.ts src/reliability/headwaysEndpoint.test.ts src/playback/vehiclesEndpoint.test.ts",
     "migrate": "tsx src/db/migrate.ts",
     "import:ttc-gtfs": "tsx src/imports/import-ttc-gtfs.ts",
     "import:ttc-surface-gtfs": "tsx src/imports/import-ttc-gtfs.ts --surface",

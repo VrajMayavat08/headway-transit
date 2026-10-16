@@ -77,7 +77,8 @@ export async function fetchTtcVehiclePositions(
       vehicleId: optionalText(vehicle.vehicle?.id),
       routeId: optionalText(vehicle.trip?.routeId),
       tripId: optionalText(vehicle.trip?.tripId),
-      directionId: optionalNumber(vehicle.trip?.directionId),
+      // Protobuf supplies prototype defaults for absent optional fields. Missing is not direction 0.
+      directionId: vehicle.trip && Object.hasOwn(vehicle.trip, 'directionId') ? optionalNumber(vehicle.trip.directionId) : null,
       latitude,
       longitude,
       bearing: optionalNumber(vehicle.position?.bearing),

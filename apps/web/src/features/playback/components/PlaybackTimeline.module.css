@@ -1,0 +1,2 @@
+.scrubber { flex: 1; min-width: 50px; height: 18px; accent-color: var(--color-accent); cursor: pointer; }
+.scrubber:disabled { opacity: .45; cursor: default; }

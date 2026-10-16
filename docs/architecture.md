@@ -20,9 +20,9 @@ The `@/` alias resolves to `apps/web/src/` in both TypeScript and Vite. Reserved
 
 ## API and database responsibilities
 
-`apps/api` keeps Fastify route wiring separate from PostgreSQL access and SQL migrations. PostgreSQL with PostGIS runs locally through `compose.yaml`; it will persist static GTFS schedules, bounded-retention vehicle observations, trip updates, alerts, derived reliability metrics, and historical playback queries. Current migrations enable PostGIS, track migration history, and establish the static GTFS schedule schema.
+`apps/api` keeps Fastify route wiring separate from PostgreSQL access and SQL migrations. PostgreSQL with PostGIS runs locally through `compose.yaml`; it persists static GTFS schedules and bounded-retention vehicle observations, and will later support trip updates, alerts, derived reliability metrics, and historical playback queries. Current migrations enable PostGIS, track migration history, establish the static GTFS schedule schema, and create TTC vehicle observation storage.
 
-For local development, copy `.env.example` to `.env`, then run `npm run db:up`, `npm run db:migrate`, and `npm run dev:api`. Stop the database with `npm run db:down`. The named Docker volume preserves local data across restarts.
+For local development, copy `.env.example` to `.env`, then run `npm run db:up`, `npm run db:migrate`, and `npm run dev:api`. Stop the database with `npm run db:down`. The named Docker volume preserves local data across restarts. See [the local integration procedure](local-integration.md) for the full API, collector, and frontend verification sequence.
 
 ## Static GTFS schedules
 
@@ -56,4 +56,4 @@ Migration `003_realtime_vehicle_observations.sql` adds timestamped TTC vehicle s
 
 `packages/` is reserved for reusable libraries when sharing is needed. `docs/screenshots/` holds future visual references. `data/imports/` and `data/archive/` hold ignored local inputs and historical files; only directory placeholders are tracked.
 
-`packages/` remains reserved for reusable libraries. A future `apps/collector` will ingest and archive transit feeds. Shared contracts may move into `packages/` when these applications require them. GTFS storage, collection, analytics, and playback behavior are not implemented yet.
+`packages/` remains reserved for reusable libraries. A future `apps/collector` may separate transit ingestion from the API process. Shared contracts may move into `packages/` when these applications require them. Reliability analytics and playback behavior are not implemented yet.

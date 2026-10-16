@@ -1,0 +1,7 @@
+.overlay { position: absolute; z-index: 3; top: 16px; left: 22px; max-width: min(330px, calc(100% - 90px)); font: 11px/1.5 'SFMono-Regular', Consolas, monospace; pointer-events: none; }
+.status, .details { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; color: var(--color-text-muted); background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-small); pointer-events: auto; }
+.status label { display: flex; align-items: center; gap: 7px; color: var(--color-text); cursor: pointer; }
+.status input { margin: 0; accent-color: var(--color-accent); }
+.details { margin-top: 8px; position: relative; padding-right: 28px; overflow-wrap: anywhere; }
+.details strong { color: var(--color-text); font-weight: 500; }
+.details button { position: absolute; top: 4px; right: 5px; border: 0; background: transparent; color: var(--color-text-muted); cursor: pointer; font-size: 18px; }

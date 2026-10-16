@@ -7,6 +7,8 @@ import { registerRouteGeometryEndpoint } from './schedules/routeGeometryEndpoint
 import { registerRouteStopsEndpoint } from './schedules/routeStopsEndpoint.js'
 import { registerRoutesEndpoint } from './schedules/routesEndpoint.js'
 import { registerRealtimeVehiclesEndpoint } from './realtime/vehiclesEndpoint.js'
+import { registerHeadwaysEndpoint } from './reliability/headwaysEndpoint.js'
+import { registerPlaybackVehiclesEndpoint } from './playback/vehiclesEndpoint.js'
 
 interface AppOptions {
   database?: Pool | null
@@ -32,6 +34,8 @@ export function buildApp({ database = createDatabasePool() }: AppOptions = {}) {
   registerRouteStopsEndpoint(app, database)
   registerRouteGeometryEndpoint(app, database)
   registerRealtimeVehiclesEndpoint(app, database)
+  registerHeadwaysEndpoint(app, database)
+  registerPlaybackVehiclesEndpoint(app, database)
 
   app.addHook('onClose', async () => { await database?.end() })
 

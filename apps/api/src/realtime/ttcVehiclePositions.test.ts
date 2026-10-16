@@ -65,3 +65,15 @@ test('fetchTtcVehiclePositions fails safely for a non-success TTC response', asy
     TtcRealtimeFetchError,
   )
 })
+
+test('omitted protobuf direction is unknown, while an explicit zero stays zero', async () => {
+  const snapshot = await fetchTtcVehiclePositions(async () => protobufResponse({
+    header: { gtfsRealtimeVersion: '2.0' },
+    entity: [
+      { id: 'missing', vehicle: { trip: { routeId: '29' }, position: { latitude: 43.65, longitude: -79.4 } } },
+      { id: 'zero', vehicle: { trip: { routeId: '29', directionId: 0 }, position: { latitude: 43.65, longitude: -79.4 } } },
+    ],
+  }))
+  assert.equal(snapshot.vehicles[0]?.directionId, null)
+  assert.equal(snapshot.vehicles[1]?.directionId, 0)
+})

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type * as maplibregl from 'maplibre-gl'
 import { Compass, Minus, Plus } from 'lucide-react'
 import { NetworkMap } from '@/features/network/components/NetworkMap'
+import { NetworkVehicles } from '@/features/network/components/NetworkVehicles'
 import { RouteInspector } from '@/features/network/components/RouteInspector'
 import { useRouteSelection } from '@/features/network/hooks/useRouteSelection'
 
@@ -12,6 +13,7 @@ export function NetworkPage() {
   return (
     <section className="network-page" aria-label="Network workspace">
       <NetworkMap onMapReady={setMap} selectedRouteId={selectedRouteId} onRouteSelect={selectRoute} selectedStopId={selectedStopId} onStopSelect={selectStop} />
+      <NetworkVehicles map={map} selectedRouteId={selectedRouteId} />
 
       <aside className="network-inspector-placeholder" aria-label="Route inspector">
         <RouteInspector route={selectedRoute} selectedStopId={selectedStopId} />

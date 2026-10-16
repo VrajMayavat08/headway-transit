@@ -22,9 +22,9 @@ npm run check:ttc-identifier-compatibility --workspace @headway/api -- --downloa
 
 The command stores the official source archive at the gitignored `data/imports/ttc-surface-gtfs.zip`, reads only `routes.txt`, `trips.txt`, and `stops.txt`, fetches one live vehicle-position snapshot, and reports distinct live route, trip, and stop identifier match rates against both SurfaceGTFS and the existing local static archive. It does not import data into PostgreSQL.
 
-## Initial decode boundary
+## Vehicle collection boundary
 
-`apps/api/src/realtime/ttcVehiclePositions.ts` fetches and decodes one vehicle-position snapshot. It performs no polling, database writes, API exposure, or frontend work. It preserves raw GTFS identifiers and filters only entities lacking usable latitude and longitude.
+`apps/api/src/realtime/ttcVehiclePositions.ts` fetches and decodes one vehicle-position snapshot. The opt-in collector persists decoded observations transactionally and matches identifiers only against the separate `ttc-surface` snapshot. It preserves reported identifiers when no SurfaceGTFS match exists. `GET /api/realtime/vehicles` reads the latest stored snapshot; it never fetches TTC on request. See [the local integration procedure](local-integration.md) for the enablement steps.
 
 ## References
 

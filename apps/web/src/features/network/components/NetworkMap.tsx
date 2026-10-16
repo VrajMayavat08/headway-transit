@@ -5,6 +5,7 @@ import { getRouteDisplayColor, routeDisplayColorExpression } from '@/features/ne
 import { ttcSurfaceRouteCollection } from '@/features/network/data/ttcSurfaceRoutes'
 import { ttcSurfaceStopCollection } from '@/features/network/data/ttcSurfaceStops'
 import { applyHeadwayBasemapPalette, createHeadwayTorontoMap } from '@/features/network/lib/mapStyle'
+import { vehicleHitLayer } from './NetworkVehicles'
 
 type NetworkMapProps = {
   onMapReady?: (map: maplibregl.Map | null) => void
@@ -177,12 +178,14 @@ export function NetworkMap({ onMapReady, selectedRouteId, onRouteSelect, selecte
       map.on('mouseenter', 'ttc-surface-route-hit-area', () => { map.getCanvas().style.cursor = 'pointer' })
       map.on('mouseleave', 'ttc-surface-route-hit-area', () => { map.getCanvas().style.cursor = '' })
       map.on('click', 'ttc-surface-route-hit-area', (event) => {
+        if (map.getLayer(vehicleHitLayer) && map.queryRenderedFeatures(event.point, { layers: [vehicleHitLayer] }).length) return
         const routeId = event.features?.[0]?.properties?.routeId
         if (typeof routeId === 'string') onRouteSelectRef.current(routeId)
       })
       map.on('mouseenter', 'ttc-surface-stops', () => { map.getCanvas().style.cursor = 'pointer' })
       map.on('mouseleave', 'ttc-surface-stops', () => { map.getCanvas().style.cursor = '' })
       map.on('click', 'ttc-surface-stops', (event) => {
+        if (map.getLayer(vehicleHitLayer) && map.queryRenderedFeatures(event.point, { layers: [vehicleHitLayer] }).length) return
         const stopId = event.features?.[0]?.properties?.stopId
         if (typeof stopId === 'string') onStopSelectRef.current(stopId)
       })
