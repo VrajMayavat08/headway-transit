@@ -68,7 +68,7 @@ main { min-width: 0; min-height: 0; padding: var(--space-6); display: flex; }
 .playback-track-placeholder i { position: absolute; top: -3px; left: 46%; width: 8px; height: 8px; border: 2px solid var(--color-surface-raised); border-radius: 50%; background: var(--color-accent); }
 .playback-live-placeholder { display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 11px; border: 1px solid var(--color-border); border-radius: var(--radius-small); color: var(--color-text-muted); }
 .routes-page { flex: 1; min-height: 0; margin: calc(-1 * var(--space-6)); display: grid; grid-template-columns: 238px minmax(330px, 1fr) minmax(310px, 36%); overflow: hidden; background: var(--color-bg); }
-.route-directory, .route-details { min-width: 0; min-height: 0; background: var(--color-surface); border-right: 1px solid var(--color-border); }
+.route-directory, .route-details { min-width: 0; min-height: 0; overflow: hidden; background: var(--color-surface); border-right: 1px solid var(--color-border); }
 .route-directory { display: flex; flex-direction: column; }
 .route-directory-header { padding: 20px 16px 14px; border-bottom: 1px solid var(--color-border); }
 .route-directory-header > span, .route-details-header > span, .route-details-header small, .route-details-metadata dt, .route-stop-list h3 { color: var(--color-text-muted); font: 10px 'SFMono-Regular', Consolas, monospace; letter-spacing: .13em; }
@@ -76,7 +76,7 @@ main { min-width: 0; min-height: 0; padding: var(--space-6); display: flex; }
 .route-search input { width: 100%; height: 32px; padding: 0 9px; color: var(--color-text); border: 1px solid var(--color-border); border-radius: var(--radius-small); outline: none; background: var(--color-surface-raised); font: 11px 'SFMono-Regular', Consolas, monospace; }
 .route-search input::placeholder { color: var(--color-text-muted); }
 .route-search input:focus { border-color: var(--color-text-muted); }
-.route-directory-list { overflow-y: auto; padding: 8px; }
+.route-directory-list { flex: 1; min-height: 0; overflow-y: auto; padding: 8px; }
 .route-directory-item { position: relative; width: 100%; min-height: 51px; display: grid; grid-template-columns: 39px minmax(0, 1fr); align-items: center; gap: 7px; padding: 8px; color: var(--color-text-muted); cursor: pointer; border: 0; border-left: 2px solid transparent; border-radius: var(--radius-small); background: transparent; text-align: left; }
 .route-directory-item:hover { color: var(--color-text); background: var(--color-surface-raised); }
 .route-directory-item[data-selected='true'] { color: var(--color-text); border-left-color: var(--route-accent); background: var(--color-surface-raised); }
@@ -106,7 +106,14 @@ main { min-width: 0; min-height: 0; padding: var(--space-6); display: flex; }
 .route-map-panel { position: relative; min-width: 0; min-height: 0; background: var(--color-bg); }
 .route-map { position: absolute; inset: 0; background: var(--color-bg); }
 .route-map-canvas { position: absolute; inset: 0; }
+.route-map-stop-callout { position: absolute; z-index: 1; top: 16px; left: 16px; display: grid; gap: 4px; max-width: min(240px, calc(100% - 32px)); padding: 9px 11px; color: var(--color-text-muted); border: 1px solid var(--color-border); border-left: 2px solid var(--color-text); border-radius: var(--radius-small); background: var(--color-surface); font: 10px 'SFMono-Regular', Consolas, monospace; pointer-events: none; }
+.route-map-stop-callout span, .route-map-stop-callout small { color: var(--color-text-muted); font-size: 9px; letter-spacing: .1em; }
+.route-map-stop-callout strong { overflow: hidden; color: var(--color-text); font-size: 11px; font-weight: 500; text-overflow: ellipsis; white-space: nowrap; }
 .route-map-status { position: absolute; bottom: 16px; left: 16px; margin: 0; padding: 8px 10px; color: var(--color-text-muted); border: 1px solid var(--color-border); border-radius: var(--radius-small); background: var(--color-surface); font: 10px 'SFMono-Regular', Consolas, monospace; pointer-events: none; }
+@media (min-width: 641px) {
+  .app-shell[data-workspace='routes'] { height: 100dvh; min-height: 0; overflow: hidden; }
+  .app-shell[data-workspace='routes'] main { overflow: hidden; }
+}
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .stops-page { flex: 1; min-height: 0; margin: calc(-1 * var(--space-6)); display: grid; grid-template-columns: 264px minmax(310px, 1fr) minmax(300px, 34%); overflow: hidden; background: var(--color-bg); }
 .stop-directory, .stop-details { min-width: 0; min-height: 0; border-right: 1px solid var(--color-border); }

@@ -61,6 +61,7 @@ export function RoutesPage() {
         <RouteMap
           routeId={selectedRoute?.routeId ?? null}
           geometry={routeGeometry}
+          routeStops={routeStops}
           isLoading={selectedRoute !== null && isGeometryLoading}
           isError={selectedRoute !== null && isGeometryError}
         />
