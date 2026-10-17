@@ -5,6 +5,7 @@ import { checkDatabaseHealth } from './db/health.js'
 import { createDatabasePool } from './db/pool.js'
 import { getCorsOrigins } from './config.js'
 import { registerRouteGeometryEndpoint } from './schedules/routeGeometryEndpoint.js'
+import { registerStopGeometryEndpoint } from './schedules/stopGeometryEndpoint.js'
 import { registerRouteStopsEndpoint } from './schedules/routeStopsEndpoint.js'
 import { registerRoutesEndpoint } from './schedules/routesEndpoint.js'
 import { registerRealtimeVehiclesEndpoint } from './realtime/vehiclesEndpoint.js'
@@ -37,6 +38,7 @@ export function buildApp({ database = createDatabasePool(), alertsService }: App
   registerRoutesEndpoint(app, database)
   registerRouteStopsEndpoint(app, database)
   registerRouteGeometryEndpoint(app, database)
+  registerStopGeometryEndpoint(app, database)
   registerRealtimeVehiclesEndpoint(app, database)
   registerHeadwaysEndpoint(app, database)
   registerPlaybackVehiclesEndpoint(app, database)

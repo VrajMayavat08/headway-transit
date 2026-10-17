@@ -3,10 +3,16 @@ import { TopNav } from './TopNav'
 import { SideRail } from './SideRail'
 
 export function AppShell() {
-  const isRoutesWorkspace = useRouterState({ select: (state) => state.location.pathname === '/routes' })
+  const workspace = useRouterState({
+    select: (state) => state.location.pathname === '/routes'
+      ? 'routes'
+      : state.location.pathname === '/stops'
+        ? 'stops'
+        : undefined,
+  })
 
   return (
-    <div className="app-shell" data-workspace={isRoutesWorkspace ? 'routes' : undefined}>
+    <div className="app-shell" data-workspace={workspace}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <TopNav />
       <SideRail />
