@@ -1,26 +1,22 @@
 import { useState } from 'react'
-import { ServiceEvents } from '@/features/reliability/components/AnalysisEmptyStates'
 import { HeadwayAnalysis } from '@/features/reliability/components/ObservedHeadways'
 import { ReliabilityControls } from '@/features/reliability/components/ReliabilityControls'
-import { ReliabilityOverview } from '@/features/reliability/components/ReliabilityOverview'
-import { RouteComparison } from '@/features/reliability/components/RouteComparison'
 import type { ReliabilityMetric, ReliabilityTimeRange } from '@/features/reliability/types'
 import { ttcSurfaceRoutes } from '@/features/network/data/ttcSurfaceRoutes'
 
 export function ReliabilityPage() {
   const [routeId, setRouteId] = useState('all')
   const [range, setRange] = useState<ReliabilityTimeRange>('today')
-  const [metric, setMetric] = useState<ReliabilityMetric>('on-time')
+  const [metric, setMetric] = useState<ReliabilityMetric>('headway')
 
   return (
     <section className="reliability-page" aria-labelledby="page-title">
       <header className="reliability-page-header">
-        <div><span>RELIABILITY</span><h1 id="page-title">Service analysis</h1><p>Static route context and a bounded vehicle-passage detection pilot. Performance scores remain unavailable.</p></div>
+        <div><span>RELIABILITY</span><h1 id="page-title">Observed headway analysis</h1><p>Vehicle passages from the latest 60 minutes. Headway bounds account for sampling uncertainty; route-wide performance scores are not yet available.</p></div>
         <ReliabilityControls routes={ttcSurfaceRoutes} routeId={routeId} range={range} metric={metric} onRouteChange={setRouteId} onRangeChange={setRange} onMetricChange={setMetric} />
       </header>
-      <ReliabilityOverview />
-      <RouteComparison routes={routeId === 'all' ? ttcSurfaceRoutes : ttcSurfaceRoutes.filter((route) => route.routeId === routeId)} />
-      <div className="reliability-analysis-grid"><HeadwayAnalysis routeId={routeId} /><ServiceEvents /></div>
+      {metric !== 'headway' && <p className="reliability-selection-note">{metric === 'on-time' ? 'On-time performance' : metric === 'bunching' ? 'Bunching' : 'Service-gap'} analysis is not yet available. Observed headway bounds remain shown below.</p>}
+      <HeadwayAnalysis routeId={routeId} />
     </section>
   )
 }

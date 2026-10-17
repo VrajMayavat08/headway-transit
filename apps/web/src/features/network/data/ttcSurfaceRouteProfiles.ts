@@ -10,6 +10,8 @@ export type TtcSurfaceRouteProfile = {
   headsign: string | null
   directionId: string | null
   stopCount: number
+  shownPatternCount: number
+  omittedPatternCount: number
   firstStop: TtcRouteSequenceStop | null
   lastStop: TtcRouteSequenceStop | null
   stopSequence: TtcRouteSequenceStop[]

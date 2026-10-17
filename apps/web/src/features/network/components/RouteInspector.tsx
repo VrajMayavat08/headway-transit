@@ -30,6 +30,7 @@ export function RouteInspector({ route, selectedStopId }: RouteInspectorProps) {
         <strong>{profile.routeShortName}</strong>
         <h2>{profile.routeLongName}</h2>
         <span className="route-inspector-status">SCHEDULED NETWORK</span>
+        <span className="route-inspector-status">MAP: {profile.shownPatternCount} PATTERNS SHOWN{profile.omittedPatternCount > 0 ? ` · ${profile.omittedPatternCount} OMITTED` : ''}</span>
       </header>
 
       <dl className="route-inspector-details">

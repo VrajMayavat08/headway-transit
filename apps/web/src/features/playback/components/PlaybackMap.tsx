@@ -51,6 +51,8 @@ export function PlaybackMap({ routeId, vehicles }: PlaybackMapProps) {
     if (!container) return undefined
     const map = createHeadwayTorontoMap(container)
     mapRef.current = map
+    const resizeObserver = new ResizeObserver(() => map.resize())
+    resizeObserver.observe(container)
 
     map.once('style.load', () => {
       applyHeadwayBasemapPalette(map)
@@ -58,12 +60,16 @@ export function PlaybackMap({ routeId, vehicles }: PlaybackMapProps) {
       map.addLayer({ id: 'playback-ttc-route-shadow', type: 'line', source: 'playback-ttc-routes', paint: { 'line-color': '#a6adaa', 'line-opacity': 0.25, 'line-width': 5.5 }, layout: { 'line-cap': 'round', 'line-join': 'round' } })
       map.addLayer({ id: 'playback-ttc-routes', type: 'line', source: 'playback-ttc-routes', paint: { 'line-color': routeDisplayColorExpression as unknown as never, 'line-opacity': routeIdRef.current === 'all' ? 0.92 : 1, 'line-width': 3.25 }, layout: { 'line-cap': 'round', 'line-join': 'round' } })
       map.addSource('playback-vehicles', { type: 'geojson', data: vehicleCollection(vehiclesRef.current) })
+      map.addLayer({ id: 'playback-vehicle-halo', type: 'circle', source: 'playback-vehicles', paint: {
+        'circle-color': '#0b1212', 'circle-opacity': 0.82,
+        'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 4.5, 13, 6.5],
+      } })
       map.addLayer({ id: 'playback-vehicles', type: 'circle', source: 'playback-vehicles', paint: {
-        'circle-color': ['get', 'color'], 'circle-radius': 3.5, 'circle-stroke-width': 1.2, 'circle-stroke-color': '#0b1212',
+        'circle-color': ['get', 'color'], 'circle-radius': ['interpolate', ['linear'], ['zoom'], 9, 2.8, 13, 4.2], 'circle-stroke-width': 1, 'circle-stroke-color': '#f1eee5',
       } })
     })
 
-    return () => { mapRef.current = null; map.remove() }
+    return () => { resizeObserver.disconnect(); mapRef.current = null; map.remove() }
   }, [])
 
   return <div ref={mapContainer} className="playback-map" aria-label="Toronto historical playback map" />

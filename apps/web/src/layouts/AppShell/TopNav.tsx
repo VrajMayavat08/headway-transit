@@ -1,5 +1,5 @@
 import { Link, useRouterState } from '@tanstack/react-router'
-import { Search } from 'lucide-react'
+import { NetworkRouteSearch } from '@/features/network/components/NetworkRouteSearch'
 import { navigation } from './navigation'
 
 export function TopNav() {
@@ -7,7 +7,7 @@ export function TopNav() {
 
   return (
     <header className="top-bar">
-      <Link to="/network" className="wordmark">HEADWAY</Link>
+      <Link to="/network" search={{ routeId: undefined }} className="wordmark">HEADWAY</Link>
       <nav className="top-nav" aria-label="Primary navigation">
         {navigation.map(({ to, label }) => <Link key={to} to={to} activeOptions={{ exact: true }}>{label}</Link>)}
       </nav>
@@ -17,11 +17,7 @@ export function TopNav() {
             <time dateTime="08:42:17">08:42:17</time>
             <span><i aria-hidden="true" />LIVE</span>
           </div>
-          <div className="network-top-search" role="search" aria-label="Network search">
-            <Search size={15} strokeWidth={1.5} aria-hidden="true" />
-            <span>Search routes, stops, or vehicles…</span>
-            <kbd>⌘ K</kbd>
-          </div>
+          <NetworkRouteSearch />
         </div>
       )}
     </header>

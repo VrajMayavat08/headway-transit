@@ -5,8 +5,10 @@ export type VehicleObservation = {
   entityId: string
   vehicleId: string | null
   reportedRouteId: string | null
+  matchedSurfaceRouteId: string | null
   sourceTimestamp: number | null
   matchedSurfaceTripId: string | null
+  bearing: number | null
   latitude: number
   longitude: number
 }
@@ -23,6 +25,10 @@ function nullableText(value: unknown): string | null {
 
 function timestamp(value: unknown): number | null {
   return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 8_640_000_000_000 ? value : null
+}
+
+function bearing(value: unknown): number | null {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value <= 360 ? value : null
 }
 
 export async function fetchVehicles(signal?: AbortSignal): Promise<VehicleResponse> {
@@ -52,7 +58,9 @@ export async function fetchVehicles(signal?: AbortSignal): Promise<VehicleRespon
         || Math.abs(row.latitude) > 90 || Math.abs(row.longitude) > 180) return []
       return [{
         entityId: row.entityId, vehicleId: nullableText(row.vehicleId), reportedRouteId: nullableText(row.reportedRouteId),
+        matchedSurfaceRouteId: nullableText(row.matchedSurfaceRouteId),
         matchedSurfaceTripId: nullableText(row.matchedSurfaceTripId), sourceTimestamp: timestamp(row.sourceTimestamp),
+        bearing: bearing(row.bearing),
         latitude: row.latitude, longitude: row.longitude,
       }]
     }),

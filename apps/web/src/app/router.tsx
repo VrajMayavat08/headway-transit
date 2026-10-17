@@ -11,9 +11,16 @@ const rootRoute = createRootRoute({ component: AppShell })
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  beforeLoad: () => { throw redirect({ to: '/network', replace: true }) },
+  beforeLoad: () => { throw redirect({ to: '/network', search: { routeId: undefined }, replace: true }) },
 })
-const networkRoute = createRoute({ getParentRoute: () => rootRoute, path: '/network', component: NetworkPage })
+const networkRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/network',
+  validateSearch: (search: Record<string, unknown>) => ({
+    routeId: typeof search.routeId === 'string' ? search.routeId : undefined,
+  }),
+  component: NetworkPage,
+})
 const routesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/routes',

@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "typecheck": "tsc --noEmit",
-    "test": "node --test --experimental-strip-types tests/routeStopMapData.test.ts",
+    "test": "node --test --experimental-strip-types tests/routeStopMapData.test.ts tests/vehicleIcons.test.ts tests/networkSearchVehicles.test.ts tests/networkPatternData.test.ts",
     "preview": "vite preview",
     "import:ttc-gtfs": "node scripts/import-ttc-static-gtfs.mjs"
   },

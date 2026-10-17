@@ -13,6 +13,10 @@ function readable(value: string | null) {
   return value?.replaceAll('_', ' ') ?? 'Details not classified'
 }
 
+function hasSeparateDescription(alert: ServiceAlert) {
+  return Boolean(alert.description && alert.description.trim().toLocaleLowerCase() !== alert.title?.trim().toLocaleLowerCase())
+}
+
 export function AlertTimeline({ alerts, selectedAlertId, state, response, onSelect }: AlertTimelineProps) {
   const emptyCopy = {
     loading: ['LOADING OFFICIAL FEED', 'Requesting the current TTC service-alert dataset.'],
@@ -35,7 +39,9 @@ export function AlertTimeline({ alerts, selectedAlertId, state, response, onSele
           <span className="alert-list-marker" aria-hidden="true" />
           <span className="alert-list-copy">
             <strong>{alert.title ?? alert.description ?? 'TITLE NOT PROVIDED'}</strong>
-            <small>{readable(alert.effect)} · {alert.affectedRouteIds.length ? `Routes ${alert.affectedRouteIds.join(', ')}` : 'System-wide / route not supplied'}</small>
+            {hasSeparateDescription(alert) && <span className="alert-list-description">{alert.description}</span>}
+            <small>{readable(alert.effect)} · {alert.affectedRouteIds.length ? 'Affected routes' : 'System-wide / route not supplied'}</small>
+            {alert.affectedRouteIds.length > 0 && <span className="alert-route-tags">{alert.affectedRouteIds.map((routeId) => <i key={routeId}>{routeId}</i>)}</span>}
           </span>
           <time dateTime={alert.lastUpdatedAt ?? undefined}>{formatLocalDateTime(alert.lastUpdatedAt, 'Timestamp not supplied')}</time>
         </button>)}

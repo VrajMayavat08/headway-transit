@@ -1,14 +1,22 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import type * as maplibregl from 'maplibre-gl'
+import { useNavigate, useSearch } from '@tanstack/react-router'
 import { Compass, Minus, Plus } from 'lucide-react'
 import { NetworkMap } from '@/features/network/components/NetworkMap'
 import { NetworkVehicles } from '@/features/network/components/NetworkVehicles'
 import { RouteInspector } from '@/features/network/components/RouteInspector'
 import { useRouteSelection } from '@/features/network/hooks/useRouteSelection'
+import { getTtcSurfaceRoute } from '@/features/network/data/ttcSurfaceRoutes'
 
 export function NetworkPage() {
   const [map, setMap] = useState<maplibregl.Map | null>(null)
-  const { selectedRouteId, selectedRoute, selectRoute, selectedStopId, selectedStop, selectStop } = useRouteSelection()
+  const { routeId } = useSearch({ from: '/network' })
+  const navigate = useNavigate({ from: '/network' })
+  const selectedRouteId = getTtcSurfaceRoute(routeId ?? null)?.routeId ?? null
+  const setSelectedRouteId = useCallback((nextRouteId: string) => {
+    navigate({ search: { routeId: nextRouteId }, replace: true })
+  }, [navigate])
+  const { selectedRoute, selectRoute, selectedStopId, selectedStop, selectStop } = useRouteSelection(selectedRouteId, setSelectedRouteId)
 
   return (
     <section className="network-page" aria-label="Network workspace">

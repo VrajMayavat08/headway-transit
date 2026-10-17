@@ -9,6 +9,7 @@ const sourceUrl = 'https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/7795b
 const rawArchivePath = resolve(repositoryRoot, 'data/imports/ttc-static-gtfs.zip')
 const outputPath = resolve(repositoryRoot, 'apps/web/src/features/network/data/generated/ttc-surface-routes.json')
 const stopsOutputPath = resolve(repositoryRoot, 'apps/web/src/features/network/data/generated/ttc-surface-stops.json')
+const patternStopsOutputPath = resolve(repositoryRoot, 'apps/web/src/features/network/data/generated/ttc-surface-pattern-stops.json')
 const profilesOutputPath = resolve(repositoryRoot, 'apps/web/src/features/network/data/generated/ttc-surface-route-profiles.json')
 const selectedRouteShortNames = ['29', '35', '52', '54', '63', '75', '97', '501', '504']
 const surfaceRouteTypes = new Set(['0', '3'])
@@ -102,6 +103,12 @@ const selectedTripIds = new Set(selectedTrips.map((trip) => trip.trip_id))
 const candidateTrips = selectedTrips.filter((trip) => trip.shape_id)
 const candidateShapeIds = new Set(candidateTrips.map((trip) => trip.shape_id))
 const shapePoints = new Map()
+const routeById = new Map(selectedRoutes.map((route) => [route.route_id, route]))
+const tripRouteIds = new Map(selectedTrips.map((trip) => [trip.trip_id, trip.route_id]))
+const stopsById = new Map(stops.map((stop) => [stop.stop_id, stop]))
+const stopTimesByTripId = new Map()
+const routesByStopId = new Map()
+const orderedStopsByTripId = new Map()
 
 for (const point of shapes) {
   if (!candidateShapeIds.has(point.shape_id)) continue
@@ -112,53 +119,6 @@ for (const point of shapes) {
   points.push({ sequence: Number(point.shape_pt_sequence), coordinates: [longitude, latitude] })
   shapePoints.set(point.shape_id, points)
 }
-
-const representativeTripsByRouteId = new Map()
-const features = selectedRoutes.map((route) => {
-  const color = routeColor(route.route_color)
-  if (!color) throw new Error(`Route ${route.route_short_name} has no usable GTFS route_color`)
-
-  const representativeTrip = candidateTrips
-    .filter((trip) => trip.route_id === route.route_id)
-    .sort((a, b) => (shapePoints.get(b.shape_id)?.length ?? 0) - (shapePoints.get(a.shape_id)?.length ?? 0))[0]
-
-  if (!representativeTrip) throw new Error(`Route ${route.route_short_name} has no trip with a shape_id`)
-  representativeTripsByRouteId.set(route.route_id, representativeTrip)
-  const points = shapePoints.get(representativeTrip.shape_id)?.sort((a, b) => a.sequence - b.sequence) ?? []
-  if (points.length < 2) throw new Error(`Route ${route.route_short_name} has an incomplete representative shape`)
-
-  const properties = {
-    routeId: route.route_id,
-    routeShortName: route.route_short_name,
-    routeLongName: route.route_long_name,
-    officialRouteColor: color,
-    routeType: Number(route.route_type),
-  }
-  const coordinates = points.map((point) => point.coordinates)
-
-  return [
-    {
-    type: 'Feature',
-    properties,
-    geometry: {
-      type: 'LineString',
-      coordinates,
-    },
-    },
-    {
-      type: 'Feature',
-      properties,
-      geometry: { type: 'Point', coordinates: coordinates[Math.floor(coordinates.length / 2)] },
-    },
-  ]
-}).flat()
-
-await mkdir(dirname(outputPath), { recursive: true })
-await writeFile(outputPath, `${JSON.stringify({ type: 'FeatureCollection', features }, null, 2)}\n`)
-const routeById = new Map(selectedRoutes.map((route) => [route.route_id, route]))
-const tripRouteIds = new Map(selectedTrips.map((trip) => [trip.trip_id, trip.route_id]))
-const routesByStopId = new Map()
-const stopTimesByTripId = new Map()
 
 for (const stopTime of stopTimes) {
   if (selectedTripIds.has(stopTime.trip_id)) {
@@ -171,6 +131,151 @@ for (const stopTime of stopTimes) {
   const routeIds = routesByStopId.get(stopTime.stop_id) ?? new Set()
   routeIds.add(routeId)
   routesByStopId.set(stopTime.stop_id, routeIds)
+}
+
+function orderedStops(trip) {
+  const cached = orderedStopsByTripId.get(trip.trip_id)
+  if (cached) return cached
+  const sequence = (stopTimesByTripId.get(trip.trip_id) ?? [])
+    .sort((a, b) => Number(a.stop_sequence) - Number(b.stop_sequence))
+    .flatMap((stopTime) => {
+      const stop = stopsById.get(stopTime.stop_id)
+      return stop ? [{ stopId: stop.stop_id, stopName: stop.stop_name }] : []
+    })
+  orderedStopsByTripId.set(trip.trip_id, sequence)
+  return sequence
+}
+
+function routePatternCandidates(route) {
+  const byPatternIdentity = new Map()
+  for (const trip of candidateTrips) {
+    if (trip.route_id !== route.route_id) continue
+    const points = shapePoints.get(trip.shape_id)?.sort((a, b) => a.sequence - b.sequence) ?? []
+    if (points.length < 2) continue
+    const stopIds = orderedStops(trip).map((stop) => stop.stopId).join(',')
+    const identity = [trip.shape_id, trip.direction_id || '', trip.trip_headsign || '', stopIds].join('|')
+    const tripsForPattern = byPatternIdentity.get(identity) ?? []
+    tripsForPattern.push(trip)
+    byPatternIdentity.set(identity, tripsForPattern)
+  }
+
+  const patterns = [...byPatternIdentity].map(([, tripsForPattern]) => {
+    const representativeTrip = [...tripsForPattern].sort((a, b) => a.trip_id.localeCompare(b.trip_id))[0]
+    const shapeId = representativeTrip.shape_id
+    const coordinates = (shapePoints.get(shapeId) ?? [])
+      .sort((a, b) => a.sequence - b.sequence)
+      .map((point) => point.coordinates)
+    return {
+      patternId: `${route.route_id}:${shapeId}`,
+      shapeId,
+      representativeTrip,
+      tripCount: tripsForPattern.length,
+      coordinates,
+      stopSequence: orderedStops(representativeTrip),
+    }
+  })
+
+  const longestPatternByShapeId = new Map()
+  for (const pattern of patterns) {
+    const current = longestPatternByShapeId.get(pattern.shapeId)
+    if (!current || pattern.stopSequence.length > current.stopSequence.length
+      || (pattern.stopSequence.length === current.stopSequence.length && pattern.tripCount > current.tripCount)) {
+      longestPatternByShapeId.set(pattern.shapeId, pattern)
+    }
+  }
+
+  return [...longestPatternByShapeId.values()]
+    .sort((a, b) => b.stopSequence.length - a.stopSequence.length || b.tripCount - a.tripCount || a.shapeId.localeCompare(b.shapeId))
+}
+
+function selectPatterns(patterns, routeShortName) {
+  const selected = []
+  const add = (pattern) => {
+    if (pattern && !selected.some((candidate) => candidate.shapeId === pattern.shapeId) && selected.length < 5) selected.push(pattern)
+  }
+  const baseRouteExpression = new RegExp(`\\b${routeShortName}\\b`)
+  add(patterns.find((pattern) => baseRouteExpression.test(pattern.representativeTrip.trip_headsign || '')) ?? patterns[0])
+
+  const representedDirections = new Set(selected.map((pattern) => pattern.representativeTrip.direction_id || ''))
+  for (const pattern of patterns) {
+    const direction = pattern.representativeTrip.direction_id || ''
+    if (!representedDirections.has(direction)) {
+      add(pattern)
+      representedDirections.add(direction)
+    }
+  }
+
+  const representedHeadsigns = new Set(selected.map((pattern) => pattern.representativeTrip.trip_headsign || ''))
+  for (const pattern of patterns) {
+    const headsign = pattern.representativeTrip.trip_headsign || ''
+    if (!representedHeadsigns.has(headsign)) {
+      add(pattern)
+      representedHeadsigns.add(headsign)
+    }
+  }
+
+  for (const pattern of patterns) add(pattern)
+  return selected
+}
+
+const selectedPatternsByRouteId = new Map()
+const allPatternCountsByRouteId = new Map()
+const features = selectedRoutes.flatMap((route) => {
+  const color = routeColor(route.route_color)
+  if (!color) throw new Error(`Route ${route.route_short_name} has no usable GTFS route_color`)
+
+  const candidates = routePatternCandidates(route)
+  if (!candidates.length) throw new Error(`Route ${route.route_short_name} has no complete shape patterns`)
+  const selectedPatterns = selectPatterns(candidates, route.route_short_name)
+  selectedPatternsByRouteId.set(route.route_id, selectedPatterns)
+  allPatternCountsByRouteId.set(route.route_id, candidates.length)
+
+  return selectedPatterns.flatMap((pattern, index) => {
+    const properties = {
+      routeId: route.route_id,
+      routeShortName: route.route_short_name,
+      routeLongName: route.route_long_name,
+      officialRouteColor: color,
+      routeType: Number(route.route_type),
+      patternId: pattern.patternId,
+      shapeId: pattern.shapeId,
+      representativeTripId: pattern.representativeTrip.trip_id,
+      tripCount: pattern.tripCount,
+      directionId: pattern.representativeTrip.direction_id || null,
+      headsign: pattern.representativeTrip.trip_headsign || null,
+      isPrimary: index === 0,
+    }
+    const line = { type: 'Feature', properties, geometry: { type: 'LineString', coordinates: pattern.coordinates } }
+    if (index !== 0) return [line]
+    return [line, { type: 'Feature', properties, geometry: { type: 'Point', coordinates: pattern.coordinates[Math.floor(pattern.coordinates.length / 2)] } }]
+  })
+})
+
+const patternStopFeaturesByKey = new Map()
+for (const route of selectedRoutes) {
+  for (const pattern of selectedPatternsByRouteId.get(route.route_id) ?? []) {
+    for (const sequenceStop of pattern.stopSequence) {
+      const stop = stopsById.get(sequenceStop.stopId)
+      const latitude = Number(stop?.stop_lat)
+      const longitude = Number(stop?.stop_lon)
+      if (!stop || stop.location_type === '1' || !Number.isFinite(latitude) || !Number.isFinite(longitude)) continue
+      const key = `${route.route_id}:${stop.stop_id}`
+      const feature = patternStopFeaturesByKey.get(key) ?? {
+        type: 'Feature',
+        properties: {
+          routeId: route.route_id,
+          stopId: stop.stop_id,
+          stopName: stop.stop_name,
+          stopLat: latitude,
+          stopLon: longitude,
+          patternIds: [],
+        },
+        geometry: { type: 'Point', coordinates: [longitude, latitude] },
+      }
+      feature.properties.patternIds.push(pattern.patternId)
+      patternStopFeaturesByKey.set(key, feature)
+    }
+  }
 }
 
 const stopFeatures = stops.flatMap((stop) => {
@@ -194,16 +299,12 @@ const stopFeatures = stops.flatMap((stop) => {
   }]
 })
 
-const stopsById = new Map(stops.map((stop) => [stop.stop_id, stop]))
 const routeProfiles = selectedRoutes.map((route) => {
-  const representativeTrip = representativeTripsByRouteId.get(route.route_id)
-  const stopSequence = (stopTimesByTripId.get(representativeTrip.trip_id) ?? [])
-    .sort((a, b) => Number(a.stop_sequence) - Number(b.stop_sequence))
-    .flatMap((stopTime) => {
-      const stop = stopsById.get(stopTime.stop_id)
-      return stop ? [{ stopId: stop.stop_id, stopName: stop.stop_name }] : []
-    })
-  const stopCount = [...routesByStopId.values()].filter((routeIds) => routeIds.has(route.route_id)).length
+  const [primaryPattern] = selectedPatternsByRouteId.get(route.route_id) ?? []
+  if (!primaryPattern) throw new Error(`Route ${route.route_short_name} has no selected primary pattern`)
+  const stopSequence = primaryPattern.stopSequence
+  const shownPatternCount = selectedPatternsByRouteId.get(route.route_id).length
+  const omittedPatternCount = (allPatternCountsByRouteId.get(route.route_id) ?? shownPatternCount) - shownPatternCount
 
   return {
     routeId: route.route_id,
@@ -211,19 +312,25 @@ const routeProfiles = selectedRoutes.map((route) => {
     routeLongName: route.route_long_name,
     routeType: Number(route.route_type),
     officialRouteColor: routeColor(route.route_color),
-    representativeTripId: representativeTrip.trip_id,
-    headsign: representativeTrip.trip_headsign || null,
-    directionId: representativeTrip.direction_id || null,
-    stopCount,
+    representativeTripId: primaryPattern.representativeTrip.trip_id,
+    headsign: primaryPattern.representativeTrip.trip_headsign || null,
+    directionId: primaryPattern.representativeTrip.direction_id || null,
+    stopCount: stopSequence.length,
+    shownPatternCount,
+    omittedPatternCount,
     firstStop: stopSequence[0] ?? null,
     lastStop: stopSequence.at(-1) ?? null,
     stopSequence,
   }
 })
 
+await mkdir(dirname(outputPath), { recursive: true })
+await writeFile(outputPath, `${JSON.stringify({ type: 'FeatureCollection', features }, null, 2)}\n`)
 await writeFile(stopsOutputPath, `${JSON.stringify({ type: 'FeatureCollection', features: stopFeatures }, null, 2)}\n`)
+await writeFile(patternStopsOutputPath, `${JSON.stringify({ type: 'FeatureCollection', features: [...patternStopFeaturesByKey.values()] }, null, 2)}\n`)
 await writeFile(profilesOutputPath, `${JSON.stringify(routeProfiles, null, 2)}\n`)
-console.log(`Generated ${selectedRoutes.length} TTC surface routes (${features.length} GeoJSON features) at ${outputPath}`)
+console.log(`Generated ${selectedRoutes.length} TTC surface route patterns (${features.length} GeoJSON features) at ${outputPath}`)
 console.log(`Generated ${stopFeatures.length} TTC stops at ${stopsOutputPath}`)
+console.log(`Generated ${patternStopFeaturesByKey.size} pattern-associated TTC stops at ${patternStopsOutputPath}`)
 console.log(`Generated ${routeProfiles.length} TTC route profiles at ${profilesOutputPath}`)
 console.log(selectedRoutes.map((route) => `${route.route_short_name} ${route.route_long_name}`).join('\n'))

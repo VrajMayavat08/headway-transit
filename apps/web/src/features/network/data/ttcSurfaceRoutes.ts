@@ -6,6 +6,13 @@ export type TtcSurfaceRoute = {
   routeLongName: string
   routeType: number
   officialRouteColor: string
+  patternId: string
+  shapeId: string
+  representativeTripId: string
+  tripCount: number
+  directionId: string | null
+  headsign: string | null
+  isPrimary: boolean
 }
 
 type TtcRouteFeature = {
@@ -17,7 +24,7 @@ type TtcRouteFeature = {
 export const ttcSurfaceRouteCollection = generatedRoutes as { type: 'FeatureCollection'; features: TtcRouteFeature[] }
 
 export const ttcSurfaceRoutes = ttcSurfaceRouteCollection.features
-  .filter((feature) => feature.geometry.type === 'LineString')
+  .filter((feature) => feature.geometry.type === 'LineString' && feature.properties.isPrimary)
   .map((feature) => feature.properties)
 
 export function getTtcSurfaceRoute(routeId: string | null) {
@@ -28,7 +35,7 @@ export function getTtcSurfaceRouteGeometry(routeId: string | null) {
   if (!routeId) return null
 
   const feature = ttcSurfaceRouteCollection.features.find(
-    (candidate) => candidate.geometry.type === 'LineString' && candidate.properties.routeId === routeId,
+    (candidate) => candidate.geometry.type === 'LineString' && candidate.properties.routeId === routeId && candidate.properties.isPrimary,
   )
 
   return feature?.geometry.type === 'LineString' ? feature.geometry.coordinates as number[][] : null

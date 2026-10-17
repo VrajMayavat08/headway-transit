@@ -17,6 +17,7 @@ export function PlaybackTimeline({ timeline, requestedAt, actualAt, onSeek, load
   const previous = timeline.filter((time) => time < reference).at(-1)
   const next = timeline.find((time) => time > reference)
   return <section className="playback-timeline" aria-label="Historical playback timeline">
+    <div className="playback-selected-time" aria-live="polite"><span>SELECTED SNAPSHOT (LOCAL)</span><strong>{actualAt ? formatLocalDateTime(actualAt) : 'No collected snapshot'}</strong></div>
     <div className="playback-timeline-controls">
       <button type="button" disabled={!previous} onClick={() => previous && onSeek(previous)} aria-label="Previous collected snapshot"><SkipBack size={15} /></button>
       <button type="button" disabled aria-label="Automatic playback unavailable; step through collected snapshots"><Play size={16} /></button>
@@ -30,6 +31,6 @@ export function PlaybackTimeline({ timeline, requestedAt, actualAt, onSeek, load
       onChange={(event) => onSeek(new Date(Number(event.target.value)).toISOString())} />
     <span className="playback-time-label">{formatLocalTime(end)}</span>
     <label className="playback-speed"><span>SPEED</span><select disabled aria-label="Manual snapshot review"><option>Manual</option></select></label>
-    <span className="playback-unavailable" role="status">{loading ? 'LOADING SNAPSHOT' : actualAt ? formatLocalTime(actualAt) : 'NO SNAPSHOT'}</span>
+    <span className="playback-unavailable" role="status">{loading ? 'LOADING SNAPSHOT' : actualAt ? 'DISCRETE OBSERVATION' : 'NO SNAPSHOT'}</span>
   </section>
 }
